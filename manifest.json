@@ -5,11 +5,12 @@
     "content_scripts": [
         {
             "matches": [
-                "*://*.jotform/form/*"
+                "*://*.jotform.com/form/*"
             ],
             "js": [
                 "conditions_form.js"
-            ]
+            ],
+            "world": "MAIN"
         }
     ],
     "permissions": [
