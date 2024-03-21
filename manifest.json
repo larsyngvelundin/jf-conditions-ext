@@ -5,7 +5,17 @@
     "content_scripts": [
         {
             "matches": [
-                "*://*.jotform.com/form/*"
+                "*://*.jotform.com/form/*",
+                "*://*.jotform.com/1*",
+                "*://*.jotform.com/2*",
+                "*://*.jotform.com/3*",
+                "*://*.jotform.com/4*",
+                "*://*.jotform.com/5*",
+                "*://*.jotform.com/6*",
+                "*://*.jotform.com/7*",
+                "*://*.jotform.com/8*",
+                "*://*.jotform.com/9*",
+                "*://*.jotform.com/0*"
             ],
             "js": [
                 "conditions_form.js"
