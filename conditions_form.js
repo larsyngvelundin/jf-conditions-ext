@@ -1,58 +1,145 @@
-
 console.log("Loaded script");
 
 
-
-
 function sleep(ms = 0) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-async function listAll(){
-    
+async function start() {
+
+
     await waitForElm(".form-all");
+
+    var ConditionListStyles = document.createElement("style");
+    ConditionListStyles.innerHTML = `
+    #conditionListBtn{
+        --rem: 16;
+        font-family: Verdana;
+        box-sizing: border-box;
+        cursor: pointer;
+        transition: all 0.3s ease 0s;
+        text-decoration: none;
+        padding: 8px 12px;
+        background-color: rgb(218, 222, 243);
+        color: rgb(52, 60, 106);
+        border: 1px solid rgb(151, 157, 198);
+        font-size: 13px;
+        font-weight: 500;
+        border-radius: 4px;
+        position: relative;
+    }
+
+
+    #conditionListElement {
+        position: absolute;
+        z-index: 9;
+        background-color: #f1f1f1;
+        text-align: center;
+        border: 1px solid #d3d3d3;
+      }
+      
+    #conditionListBar {
+        padding: 10px;
+        cursor: move;
+        z-index: 10;
+        background-color: #2196F3;
+        color: #fff;
+    }
+
+    .conditionsListHide{
+        display:none;
+    }
+`;
+    document.body.appendChild(ConditionListStyles);
+
     var formToolbar = await waitForElm("#form-toolbar");
     var formToolbarRight = formToolbar.getElementsByClassName("right")[0];
     var conditionListBtn = document.createElement("div");
-    conditionListBtn.innerHTML = "TEST";
-    formToolbarRight.appendChild(conditionListBtn);
+    conditionListBtn.id = "conditionListBtn";
+    conditionListBtn.innerHTML = "Conditions Debugging";
 
+    formToolbarRight.insertBefore(conditionListBtn, formToolbarRight.firstChild);
 
-    console.log(JotForm);
-    console.log("Conditions", JotForm.conditions);
-    console.log("Calculations", JotForm.calculations);
-    console.log("Field Conditions", JotForm.fieldConditions);
-    console.log("Listing all:");
-    console.log(listAll.name);
-    for(let i = 0; i < 100; i++){
-        let conditions = JotForm.conditions;
-        let calculations = JotForm.calculations;
-        for(let iCon = 0; iCon < conditions.length; iCon++){
-            //List index
-            console.log(`Condition: ${conditions[iCon].index}`);
-            //List IFs
-            console.log(conditions[iCon]);
-            //List DOs
+    conditionListBtn.addEventListener('click', toggleList, true);
 
-            //List currentlyTrue
-            let currentlyTrueString = "";
-            for (let iTrue = 0; iTrue < conditions[iCon].action.length; iTrue++){
-                if(conditions[iCon].action[iTrue].currentlyTrue == false){
-                    currentlyTrueString += "❌";
-                }
-                else{
-                    currentlyTrueString += "✅";
-                }
-            }
-            console.log(currentlyTrueString);
+    var conditionListElement = document.createElement("div");
+    conditionListElement.style.top = "50px";
+    conditionListElement.style.left = "0px";
+    conditionListElement.id = "conditionListElement";
+    document.body.appendChild(conditionListElement);
+    // conditionListElement.classList.add("conditionsListHide");
+    var conditionListBar = document.createElement("div");
+    conditionListBar.id = "conditionListBar";
+    conditionListBar.innerHTML = "Conditions:"
+    conditionListElement.appendChild(conditionListBar);
+    var conditionList = document.createElement("ul");
+    conditionListElement.appendChild(conditionList);
+    let conditions = JotForm.conditions;
+    let calculations = JotForm.calculations;
 
-        }
-        await sleep(1000);
-        console.log("Delayed for 1 second.");
-
-
+    for(let iCon = 0; iCon < conditions.length; iCon++){
+        console.log(`Condition ${iCon}`, conditions[i]);
+        var conditionLi = getConditionLi(conditions[i]);
+        conditionList.appendChild(conditionLi);
     }
+
+
+    document.body.addEventListener('click', updateList, true);
+    // console.log(JotForm);
+    // console.log("Conditions", JotForm.conditions);
+    // console.log("Calculations", JotForm.calculations);
+    // console.log("Field Conditions", JotForm.fieldConditions);
+    // console.log("Listing all:");
+    // console.log(listAll.name);
+    // for(let i = 0; i < 100; i++){
+    //     let conditions = JotForm.conditions;
+    //     let calculations = JotForm.calculations;
+    //     for(let iCon = 0; iCon < conditions.length; iCon++){
+    //         //List index
+    //         console.log(`Condition: ${conditions[iCon].index}`);
+    //         //List IFs
+    //         console.log(conditions[iCon]);
+    //         //List DOs
+
+    //         //List currentlyTrue
+    //         let currentlyTrueString = "";
+    //         for (let iTrue = 0; iTrue < conditions[iCon].action.length; iTrue++){
+    //             if(conditions[iCon].action[iTrue].currentlyTrue == false){
+    //                 currentlyTrueString += "❌";
+    //             }
+    //             else{
+    //                 currentlyTrueString += "✅";
+    //             }
+    //         }
+    //         console.log(currentlyTrueString);
+
+    //     }
+    //     await sleep(1000);
+    //     console.log("Delayed for 1 second.");
+
+    dragElement(document.getElementById("conditionListElement"));
+
+
 }
+
+
+
+function getConditionLi(condition) {
+    var conditionLi = document.createElement("li");
+    conditionLi.innerHTML = condition.id;
+    return conditionLi;
+}
+
+async function updateList() {
+    console.log("Updating list");
+}
+
+async function toggleList() {
+    console.log("Toggling list");
+    var conditionListElement = document.getElementById("conditionListElement");
+    conditionListElement.classList.toggle("conditionsListHide");
+}
+
 
 // From Yong Wang on Stack Overflow
 // https://stackoverflow.com/a/61511955
@@ -74,5 +161,37 @@ function waitForElm(selector) {
     });
 }
 
-;var test = "this is a test";
-listAll();
+//From W3Schools
+//https://www.w3schools.com/howto/howto_js_draggable.asp
+function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    if (document.getElementById("conditionListBar")) {
+        document.getElementById("conditionListBar").onmousedown = dragMouseDown;
+    } else {
+        elmnt.onmousedown = dragMouseDown;
+    }
+    function dragMouseDown(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+}
+
+start();
