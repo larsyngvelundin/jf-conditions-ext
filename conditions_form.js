@@ -63,7 +63,7 @@ async function start() {
     conditionListBtn.addEventListener('click', toggleList, true);
 
     var conditionListElement = document.createElement("div");
-    conditionListElement.style.top = "50px";
+    conditionListElement.style.top = "100px";
     conditionListElement.style.left = "0px";
     conditionListElement.id = "conditionListElement";
     document.body.appendChild(conditionListElement);
@@ -77,9 +77,9 @@ async function start() {
     let conditions = JotForm.conditions;
     let calculations = JotForm.calculations;
 
-    for(let iCon = 0; iCon < conditions.length; iCon++){
-        console.log(`Condition ${iCon}`, conditions[i]);
-        var conditionLi = getConditionLi(conditions[i]);
+    for (let iCon = 0; iCon < conditions.length; iCon++) {
+        console.log(`Condition ${iCon}`, conditions[iCon]);
+        var conditionLi = getConditionLi(conditions[iCon], iCon);
         conditionList.appendChild(conditionLi);
     }
 
@@ -122,16 +122,81 @@ async function start() {
 
 }
 
+operatorObj = {
+    "notEquals": "IS NOT EQUAL TO"
+}
+function getFieldLabel(id) {
+    fieldElement = JotForm.getFieldFromID(id);
+    fieldName = fieldElement.getElementsByTagName("label")[0].innerHTML;
+    return fieldName;
+}
 
-
-function getConditionLi(condition) {
+function getConditionLi(condition, iCon) {
     var conditionLi = document.createElement("li");
-    conditionLi.innerHTML = condition.id;
+    // conditionLi.innerHTML = condition.id;
+    // conditionLi.innerHTML = "";
+    var innerHTML = "";
+    for (let iTer = 0; iTer < condition.terms.length; iTer++) {
+        var term = condition.terms[iTer];
+        innerHTML += `<b>IF</b> ${getFieldLabel(term.field)} <b>${operatorObj[term.operator]}</b> "${term.value}"<br>`;
+    }
+    for (let iAct = 0; iAct < condition.action.length; iAct++) {
+        var action = condition.action[iAct];
+        console.log(action);
+        if ('field' in action) {
+            innerHTML += `<b>${action.visibility}</b> ${getFieldLabel(action.field)}`;
+        }
+        innerHTML += `<div id="${iCon}-${iAct}-${action.id}" class="conditionCurrentResult"></div>`;
+    }
+    conditionLi.innerHTML = innerHTML;
     return conditionLi;
 }
 
+// {
+//     "action": [
+//         {
+//             "id": "action_1709938873506",
+//             "visibility": "Show",
+//             "isError": false,
+//             "field": "13",
+//             "currentlyTrue": true
+//         }
+//     ],
+//     "id": "1709938882341",
+//     "index": "0",
+//     "link": "Any",
+//     "priority": "0",
+//     "terms": [
+//         {
+//             "id": "term_1709938873506",
+//             "field": "31",
+//             "operator": "notEquals",
+//             "value": "No",
+//             "isError": false
+//         }
+//     ],
+//     "type": "field"
+// }
+
 async function updateList() {
     console.log("Updating list");
+    var resultElements = document.getElementsByClassName("conditionCurrentResult");
+    for (let iEl = 0; iEl < resultElements.length; iEl++) {
+        console.log(resultElements[iEl].id);
+        var parts = resultElements[iEl].id.split("-");
+        var iCon = parts[0];
+        var iAct = parts[1];
+        var currentStatus = JotForm.conditions[iCon].action[iAct].currentlyTrue;
+        if (currentStatus) {
+            console.log("true for this");
+            resultElements[iEl].innerHTML = "✅";
+        }
+        else {
+            console.log("false for this");
+            resultElements[iEl].innerHTML = "❌";
+        }
+        // console.log(iEl);
+    }
 }
 
 async function toggleList() {
