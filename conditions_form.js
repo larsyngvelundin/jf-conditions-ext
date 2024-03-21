@@ -84,7 +84,11 @@ async function start() {
     }
 
 
-    document.body.addEventListener('click', updateList, true);
+    document.body.addEventListener('click', function (event) {
+        setTimeout(function () {
+            updateList(event);
+        }, 100); // Delay in milliseconds
+    }, true);
     // console.log(JotForm);
     // console.log("Conditions", JotForm.conditions);
     // console.log("Calculations", JotForm.calculations);
