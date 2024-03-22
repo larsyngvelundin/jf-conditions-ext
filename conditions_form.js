@@ -212,7 +212,15 @@ async function updateList() {
         var parts = resultElements[iEl].id.split("-");
         var iCon = parts[0];
         var iTer = parts[1];
-        
+        var term = JotForm.conditions[iCon].terms[iTer];
+        switch(term.operator){
+            case "notEquals":
+                validateNotEquals(term);
+                break;
+            case "Equals":
+                validateEquals(term);
+                break;
+        }
     }
     //Updating Action results (Still using currentlyTrue)
     resultElements = document.getElementsByClassName("conditionActionResult");
@@ -232,7 +240,9 @@ async function updateList() {
 }
 
 function validateEquals(id){}
-function validateNotEquals(id){}
+function validateNotEquals(id){
+    console.log("Checking a notEquals term");
+}
 
 async function toggleList() {
     console.log("Toggling list");
