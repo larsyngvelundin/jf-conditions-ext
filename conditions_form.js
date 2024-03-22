@@ -122,13 +122,30 @@ async function start() {
     //     console.log("Delayed for 1 second.");
 
     dragElement(document.getElementById("conditionListElement"));
-
+    updateList();
 
 }
 
-operatorObj = {
-    "notEquals": "IS NOT EQUAL TO"
+let operatorObj = {
+    "notEquals": "IS NOT EQUAL TO",
+    "isFilled": "IS FILLED"
+};
+
+let resultOperators = [
+    "notEquals",
+    "Equals"
+];
+
+function resultOfTerm(term){
+    console.log("term.operator", term.operator);
+    console.log("resultOperators", resultOperators);
+    console.log("term.operator in resultOperators",term.operator in resultOperators);
+    if(resultOperators.includes(term.operator)){
+        return ` '${term.value}'`;
+    }
+    return "";
 }
+
 function getFieldLabel(id) {
     fieldElement = JotForm.getFieldFromID(id);
     fieldName = fieldElement.getElementsByTagName("label")[0].innerHTML;
@@ -142,15 +159,20 @@ function getConditionLi(condition, iCon) {
     var innerHTML = "";
     for (let iTer = 0; iTer < condition.terms.length; iTer++) {
         var term = condition.terms[iTer];
-        innerHTML += `<b>IF</b> ${getFieldLabel(term.field)} <b>${operatorObj[term.operator]}</b> "${term.value}"<br>`;
+        innerHTML += `<div>`;
+        innerHTML += `<b>IF</b> ${getFieldLabel(term.field)} <b>${operatorObj[term.operator]}</b>${resultOfTerm(term)}`;
+        innerHTML += `<span id="${iCon}-${iTer}" class="conditionTermResult"></span>`;
+        innerHTML += `</div>`;
     }
     for (let iAct = 0; iAct < condition.action.length; iAct++) {
         var action = condition.action[iAct];
         console.log(action);
         if ('field' in action) {
+            innerHTML += `<div>`;
+            innerHTML += `<span id="${iCon}-${iAct}-${action.id}" class="conditionActionResult"></span>`;
             innerHTML += `<b>${action.visibility}</b> ${getFieldLabel(action.field)}`;
+            innerHTML += `</div>`;
         }
-        innerHTML += `<div id="${iCon}-${iAct}-${action.id}" class="conditionCurrentResult"></div>`;
     }
     conditionLi.innerHTML = innerHTML;
     return conditionLi;
@@ -184,7 +206,16 @@ function getConditionLi(condition, iCon) {
 
 async function updateList() {
     console.log("Updating list");
-    var resultElements = document.getElementsByClassName("conditionCurrentResult");
+    //Updating Term results
+    var resultElements = document.getElementsByClassName("conditionTermResult");
+    for (let iEl = 0; iEl < resultElements.length; iEl++) {
+        var parts = resultElements[iEl].id.split("-");
+        var iCon = parts[0];
+        var iTer = parts[1];
+        
+    }
+    //Updating Action results (Still using currentlyTrue)
+    resultElements = document.getElementsByClassName("conditionActionResult");
     for (let iEl = 0; iEl < resultElements.length; iEl++) {
         console.log(resultElements[iEl].id);
         var parts = resultElements[iEl].id.split("-");
@@ -192,16 +223,16 @@ async function updateList() {
         var iAct = parts[1];
         var currentStatus = JotForm.conditions[iCon].action[iAct].currentlyTrue;
         if (currentStatus) {
-            console.log("true for this");
             resultElements[iEl].innerHTML = "✅";
         }
         else {
-            console.log("false for this");
             resultElements[iEl].innerHTML = "❌";
         }
-        // console.log(iEl);
     }
 }
+
+function validateEquals(id){}
+function validateNotEquals(id){}
 
 async function toggleList() {
     console.log("Toggling list");
@@ -262,5 +293,8 @@ function dragElement(elmnt) {
         document.onmousemove = null;
     }
 }
+
+//From W3Schools
+//https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
 
 start();
