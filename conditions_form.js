@@ -34,7 +34,7 @@ async function start() {
         position: absolute;
         z-index: 9;
         background-color: #f1f1f1;
-        text-align: center;
+        text-align: left;
         border: 1px solid #d3d3d3;
       }
       
@@ -46,9 +46,14 @@ async function start() {
         color: #fff;
     }
 
+    .collapsible{
+        vertical-align: top;
+    }
+
     .conditionsListHide{
         display:none;
     }
+
 `;
     document.body.appendChild(ConditionListStyles);
 
@@ -157,8 +162,8 @@ function getConditionLi(condition, iCon) {
     var conditionLi = document.createElement("li");
     // conditionLi.innerHTML = condition.id;
     // conditionLi.innerHTML = "";
-    var innerHTML = `<button type="button" class="collapsible">v</button>`;
-    innerHTML += `<div class="content">`;
+    var innerHTML = `<button type="button" style="display:inline-block;" class="collapsible">v</button>`;
+    innerHTML += `<div class="content" style="display:inline-block;">`;
     for (let iTer = 0; iTer < condition.terms.length; iTer++) {
         var term = condition.terms[iTer];
         innerHTML += `<div>`;
@@ -173,6 +178,18 @@ function getConditionLi(condition, iCon) {
             innerHTML += `<div>`;
             innerHTML += `<span id="${iCon}-${iAct}-${action.id}" class="conditionActionResult"></span>`;
             innerHTML += `<b>${action.visibility}</b> ${getFieldLabel(action.field)}`;
+            innerHTML += `</div>`;
+        }
+        else if ('fields' in action){
+            innerHTML += `<div>`;
+            innerHTML += `<b>${action.visibility}</b>`;
+            for (let iFie = 0; iFie < action.fields.length; iFie++) {
+                innerHTML += "<div>";
+                var field = action.fields[iFie];
+                innerHTML += `<span id="${iCon}-${iAct}-${iFie}" class="conditionActionResult"></span>`;
+                innerHTML += ` ${getFieldLabel(field)}`
+                innerHTML += "</div>";
+            }
             innerHTML += `</div>`;
         }
     }
@@ -317,10 +334,12 @@ function addCollapsible() {
         coll[i].addEventListener("click", function () {
             this.classList.toggle("active");
             var content = this.nextElementSibling;
-            if (content.style.display === "block") {
+            if (content.style.display === "inline-block") {
                 content.style.display = "none";
+                this.innerHTML = "&gt;";
             } else {
-                content.style.display = "block";
+                content.style.display = "inline-block";
+                this.innerHTML = "v";
             }
         });
     }
