@@ -122,6 +122,7 @@ async function start() {
     //     console.log("Delayed for 1 second.");
 
     dragElement(document.getElementById("conditionListElement"));
+    addCollapsible();
     updateList();
 
 }
@@ -136,11 +137,11 @@ let resultOperators = [
     "Equals"
 ];
 
-function resultOfTerm(term){
+function resultOfTerm(term) {
     console.log("term.operator", term.operator);
     console.log("resultOperators", resultOperators);
-    console.log("term.operator in resultOperators",term.operator in resultOperators);
-    if(resultOperators.includes(term.operator)){
+    console.log("term.operator in resultOperators", term.operator in resultOperators);
+    if (resultOperators.includes(term.operator)) {
         return ` '${term.value}'`;
     }
     return "";
@@ -156,7 +157,8 @@ function getConditionLi(condition, iCon) {
     var conditionLi = document.createElement("li");
     // conditionLi.innerHTML = condition.id;
     // conditionLi.innerHTML = "";
-    var innerHTML = "";
+    var innerHTML = `<button type="button" class="collapsible">v</button>`;
+    innerHTML += `<div class="content">`;
     for (let iTer = 0; iTer < condition.terms.length; iTer++) {
         var term = condition.terms[iTer];
         innerHTML += `<div>`;
@@ -174,6 +176,7 @@ function getConditionLi(condition, iCon) {
             innerHTML += `</div>`;
         }
     }
+    innerHTML += "</div>"
     conditionLi.innerHTML = innerHTML;
     return conditionLi;
 }
@@ -213,7 +216,7 @@ async function updateList() {
         var iCon = parts[0];
         var iTer = parts[1];
         var term = JotForm.conditions[iCon].terms[iTer];
-        switch(term.operator){
+        switch (term.operator) {
             case "notEquals":
                 validateNotEquals(term);
                 break;
@@ -239,8 +242,8 @@ async function updateList() {
     }
 }
 
-function validateEquals(id){}
-function validateNotEquals(id){
+function validateEquals(id) { }
+function validateNotEquals(id) {
     console.log("Checking a notEquals term");
 }
 
@@ -306,5 +309,22 @@ function dragElement(elmnt) {
 
 //From W3Schools
 //https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_collapsible
+function addCollapsible() {
+    var coll = document.getElementsByClassName("collapsible");
+    var i;
+
+    for (i = 0; i < coll.length; i++) {
+        coll[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            var content = this.nextElementSibling;
+            if (content.style.display === "block") {
+                content.style.display = "none";
+            } else {
+                content.style.display = "block";
+            }
+        });
+    }
+}
+
 
 start();
