@@ -92,12 +92,12 @@ async function start() {
     var delayTime = 180;
     document.body.addEventListener('click', function (event) {
         setTimeout(function () {
-            updateList(event);
+            updateList();
         }, delayTime);
     }, true);
-    document.body.onkeydown =  function (event) {
+    document.body.onkeydown = function (event) {
         setTimeout(function () {
-            updateList(event);
+            updateList();
         }, delayTime);
     };
     // document.body.addEventListener('onkeydown', function (event) {
@@ -191,7 +191,7 @@ function getConditionLi(condition, iCon) {
             innerHTML += `<b>${action.visibility}</b> ${getFieldLabel(action.field)}`;
             innerHTML += `</div>`;
         }
-        else if ('fields' in action){
+        else if ('fields' in action) {
             innerHTML += `<div>`;
             innerHTML += `<b>${action.visibility}</b>`;
             for (let iFie = 0; iFie < action.fields.length; iFie++) {
@@ -244,13 +244,24 @@ async function updateList() {
         var iCon = parts[0];
         var iTer = parts[1];
         var term = JotForm.conditions[iCon].terms[iTer];
+        console.log("Updating", term);
+        var currentStatus;
         switch (term.operator) {
             case "notEquals":
-                validateNotEquals(term);
+                currentStatus = validateNotEquals(term);
                 break;
             case "Equals":
-                validateEquals(term);
+                currentStatus = validateEquals(term);
                 break;
+            case "isFilled":
+                currentStatus = validateIsFilled(term);
+                break;
+        }
+        if (currentStatus) {
+            resultElements[iEl].innerHTML = "✅";
+        }
+        else {
+            resultElements[iEl].innerHTML = "❌";
         }
     }
     //Updating Action results (Still using currentlyTrue)
@@ -270,9 +281,28 @@ async function updateList() {
     }
 }
 
-function validateEquals(id) { }
-function validateNotEquals(id) {
+function validateEquals(term) {
+    return false;
+}
+function validateNotEquals(term) {
     console.log("Checking a notEquals term");
+    return false;
+}
+function validateIsFilled(term) {
+    console.log("Checking an isFilled term");
+    var field = JotForm.getFieldFromID(term.field);
+    var fieldType = field.dataset.type;
+    switch (fieldType){
+        case "control_textbox":
+            currentInput = field.getElementsByTagName("input")[0].value;
+            if (currentInput == ""){
+                return false;
+            }
+            else{
+                return true;
+            }
+
+    }
 }
 
 async function toggleList() {
