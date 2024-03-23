@@ -18,9 +18,23 @@
                 "*://*.jotform.com/0*"
             ],
             "js": [
+                "modules/helpFunctions/addCollapsible.js",
+                "modules/helpFunctions/addCss.js",
+                "modules/helpFunctions/dragElement.js",
+                "modules/helpFunctions/sleep.js",
+                "modules/helpFunctions/waitForElm.js",
+                "modules/list/getConditionLi.js",
+                "modules/list/getFieldLabel.js",
+                "modules/list/toggleList.js",
+                "modules/list/resultOfTerm.js",
+                "modules/list/updateList.js",
+                "modules/termValidation/validateEquals.js",
+                "modules/termValidation/validateIsFilled.js",
+                "modules/termValidation/validateNotEquals.js",
                 "conditions_form.js"
             ],
-            "world": "MAIN"
+            "world": "MAIN",
+            "type": "module"
         }
     ],
     "permissions": [
