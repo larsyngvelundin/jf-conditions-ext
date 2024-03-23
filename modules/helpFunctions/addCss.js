@@ -26,7 +26,13 @@ function addCss() {
         text-align: left;
         border: 1px solid #d3d3d3;
       }
-      
+    
+    #conditionListElement > ul{
+        padding-inline-start: 0px;
+        margin-block-start: 0px;
+        margin-block-end: 0px;
+    }
+
     #conditionListBar {
         padding: 10px;
         cursor: move;
@@ -34,6 +40,7 @@ function addCss() {
         background-color: #2196F3;
         color: #fff;
     }
+    
 
     .collapsible{
         vertical-align: top;
@@ -41,6 +48,13 @@ function addCss() {
 
     .conditionsListHide{
         display:none;
+    }
+
+    .conditionListEntry{
+        padding: 5px;
+        font-size: 14px;
+        line-height: 1.618em;
+        list-style: none;
     }
 
 `;

@@ -1,9 +1,9 @@
 function getConditionLi(condition, iCon) {
     var conditionLi = document.createElement("li");
-    // conditionLi.innerHTML = condition.id;
-    // conditionLi.innerHTML = "";
+    conditionLi.classList.add("conditionListEntry");
     var innerHTML = `<button type="button" style="display:inline-block;" class="collapsible">v</button>`;
     innerHTML += `<div class="content" style="display:inline-block;">`;
+    innerHTML += `<div class="termDiv" style="display:block;">`;
     for (let iTer = 0; iTer < condition.terms.length; iTer++) {
         var term = condition.terms[iTer];
         innerHTML += `<div>`;
@@ -11,6 +11,8 @@ function getConditionLi(condition, iCon) {
         innerHTML += `<b>IF</b> ${getFieldLabel(term.field)} <b>${operatorObj[term.operator]}</b>${resultOfTerm(term)}`;
         innerHTML += `</div>`;
     }
+    innerHTML += "</div>"
+    innerHTML += `<div class="actionDiv" style="display:block;">`;
     for (let iAct = 0; iAct < condition.action.length; iAct++) {
         var action = condition.action[iAct];
         console.log(action);
@@ -33,6 +35,7 @@ function getConditionLi(condition, iCon) {
             innerHTML += `</div>`;
         }
     }
+    innerHTML += "</div>"
     innerHTML += "</div>"
     conditionLi.innerHTML = innerHTML;
     return conditionLi;
