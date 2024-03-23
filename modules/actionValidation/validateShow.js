@@ -1,4 +1,9 @@
 function validateShow(action){
-    console.log("Validating", action);
-    console.log(`Checking if field ${getFieldLabel(action.field)} is status ${action.visibility}`);
+    var field = JotForm.getFieldFromID(action.field);
+    if (field.classList.contains("form-field-hidden")){
+        return false;
+    }
+    else{
+        return true;
+    }
 }
