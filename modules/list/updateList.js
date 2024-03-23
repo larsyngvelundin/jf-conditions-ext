@@ -35,14 +35,17 @@ async function updateList() {
         var iCon = parts[0];
         var iAct = parts[1];
         var action = JotForm.conditions[iCon].action[iAct];
+        console.log("Checking action:",action);
         var actionType = action.visibility;
         var currentStatus;
         switch (actionType){
             case "Show":
                 currentStatus = validateShow(action);
                 break;
+            case "Hide":
+                currentStatus = validateHide(action);
+                break;
         }
-        // var currentStatus = JotForm.conditions[iCon].action[iAct].currentlyTrue;
         if (currentStatus) {
             resultElements[iEl].innerHTML = "✅";
         }
