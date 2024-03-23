@@ -11,5 +11,6 @@ function validateIsFilled(term) {
             else{
                 return true;
             }
+            break;
     }
 }
