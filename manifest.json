@@ -18,6 +18,7 @@
                 "*://*.jotform.com/0*"
             ],
             "js": [
+                "modules/actionValidation/validateShow.js",
                 "modules/helpFunctions/addCollapsible.js",
                 "modules/helpFunctions/addCss.js",
                 "modules/helpFunctions/dragElement.js",
