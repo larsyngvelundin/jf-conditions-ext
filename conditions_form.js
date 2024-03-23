@@ -89,11 +89,22 @@ async function start() {
     }
 
 
+    var delayTime = 180;
     document.body.addEventListener('click', function (event) {
         setTimeout(function () {
             updateList(event);
-        }, 100); // Delay in milliseconds
+        }, delayTime);
     }, true);
+    document.body.onkeydown =  function (event) {
+        setTimeout(function () {
+            updateList(event);
+        }, delayTime);
+    };
+    // document.body.addEventListener('onkeydown', function (event) {
+    //     setTimeout(function () {
+    //         updateList(event);
+    //     }, 100);
+    // }, true);
     // console.log(JotForm);
     // console.log("Conditions", JotForm.conditions);
     // console.log("Calculations", JotForm.calculations);
