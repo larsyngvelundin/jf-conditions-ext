@@ -7,8 +7,8 @@ function getConditionLi(condition, iCon) {
     for (let iTer = 0; iTer < condition.terms.length; iTer++) {
         var term = condition.terms[iTer];
         innerHTML += `<div>`;
-        innerHTML += `<b>IF</b> ${getFieldLabel(term.field)} <b>${operatorObj[term.operator]}</b>${resultOfTerm(term)}`;
         innerHTML += `<span id="${iCon}-${iTer}" class="conditionTermResult"></span>`;
+        innerHTML += `<b>IF</b> ${getFieldLabel(term.field)} <b>${operatorObj[term.operator]}</b>${resultOfTerm(term)}`;
         innerHTML += `</div>`;
     }
     for (let iAct = 0; iAct < condition.action.length; iAct++) {

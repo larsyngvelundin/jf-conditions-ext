@@ -34,7 +34,15 @@ async function updateList() {
         var parts = resultElements[iEl].id.split("-");
         var iCon = parts[0];
         var iAct = parts[1];
-        var currentStatus = JotForm.conditions[iCon].action[iAct].currentlyTrue;
+        var action = JotForm.conditions[iCon].action[iAct];
+        var actionType = action.visibility;
+        var currentStatus;
+        switch (actionType){
+            case "Show":
+                currentStatus = validateShow(action);
+                break;
+        }
+        // var currentStatus = JotForm.conditions[iCon].action[iAct].currentlyTrue;
         if (currentStatus) {
             resultElements[iEl].innerHTML = "✅";
         }
