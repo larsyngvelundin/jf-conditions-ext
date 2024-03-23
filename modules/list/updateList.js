@@ -36,17 +36,18 @@ async function updateList() {
         var iAct = parts[1];
         var action = JotForm.conditions[iCon].action[iAct];
         var actionType = action.visibility;
+        var currentStatus;
         switch (actionType){
             case "Show":
-                validateShow(action);
+                currentStatus = validateShow(action);
                 break;
         }
         // var currentStatus = JotForm.conditions[iCon].action[iAct].currentlyTrue;
-        // if (currentStatus) {
-        //     resultElements[iEl].innerHTML = "✅";
-        // }
-        // else {
-        //     resultElements[iEl].innerHTML = "❌";
-        // }
+        if (currentStatus) {
+            resultElements[iEl].innerHTML = "✅";
+        }
+        else {
+            resultElements[iEl].innerHTML = "❌";
+        }
     }
 }
