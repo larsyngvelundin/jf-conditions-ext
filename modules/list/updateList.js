@@ -34,12 +34,19 @@ async function updateList() {
         var parts = resultElements[iEl].id.split("-");
         var iCon = parts[0];
         var iAct = parts[1];
-        var currentStatus = JotForm.conditions[iCon].action[iAct].currentlyTrue;
-        if (currentStatus) {
-            resultElements[iEl].innerHTML = "✅";
+        var action = JotForm.conditions[iCon].action[iAct];
+        var actionType = action.visibility;
+        switch (actionType){
+            case "Show":
+                validateShow(action);
+                break;
         }
-        else {
-            resultElements[iEl].innerHTML = "❌";
-        }
+        // var currentStatus = JotForm.conditions[iCon].action[iAct].currentlyTrue;
+        // if (currentStatus) {
+        //     resultElements[iEl].innerHTML = "✅";
+        // }
+        // else {
+        //     resultElements[iEl].innerHTML = "❌";
+        // }
     }
 }
