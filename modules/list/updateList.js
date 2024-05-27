@@ -19,6 +19,9 @@ async function updateList() {
             case "isFilled":
                 currentStatus = validateIsFilled(term);
                 break;
+            case "isEmpty":
+                currentStatus = validateIsEmpty(term);
+                break;
         }
         if (currentStatus) {
             resultElements[iEl].innerHTML = "✅";
@@ -35,10 +38,10 @@ async function updateList() {
         var iCon = parts[0];
         var iAct = parts[1];
         var action = JotForm.conditions[iCon].action[iAct];
-        console.log("Checking action:",action);
+        console.log("Checking action:", action);
         var actionType = action.visibility;
         var currentStatus;
-        switch (actionType){
+        switch (actionType) {
             case "Show":
                 currentStatus = validateShow(action);
                 break;
