@@ -2,28 +2,23 @@ function validateNotEquals(term) {
     console.log("Checking a notEquals term");
     console.log(term);
     fieldElement = JotForm.getFieldFromID(term.field);
-    console.log("fieldElement", fieldElement);
     var fieldType = fieldElement.dataset.type;
-    switch (fieldType) {
-        case "control_checkbox":
-            console.log("Checking a control_checkbox");
-            let boxes = fieldElement.getElementsByClassName("form-checkbox");
-            for (var i = 0; i < boxes.length; i++){
-                console.log(boxes[i].value);
-                var afterElement = getComputedStyle(boxes[i], ':after');
-                console.log(afterElement);
-                console.log(afterElement.getPropertyValue("isConnected"));
-                console.log(afterElement.getPropertyValue("baseURI"));
-                console.log(afterElement.getPropertyValue("clientHeight"));
-                console.log(afterElement.getPropertyValue("parentElement"));
-                console.log(afterElement.getPropertyValue("tagName"));
-                if (term.value == boxes[i].value){
+    var equalToField = term.value[0] == "{" && term.value.slice(-1) == "}";
+    if (equalToField) {
+        targetFieldId = JotForm.getFieldIdFromFieldRef(term.value);
+        targetField = JotForm.getFieldFromID(targetFieldId);
+        
+        switch (fieldType) {
+        }
+    }
+    else {
+        switch (fieldType) {
+            case "control_email":
+                if (validateEquals(term)){
                     return false;
                 }
-            }
-            //list all input type="checkbox"
-            //check term against it
-            break;
+                return true;
+        }
     }
-    return true;
+    return false;
 }
