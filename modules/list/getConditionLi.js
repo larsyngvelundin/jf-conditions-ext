@@ -34,6 +34,17 @@ function getConditionLi(condition, iCon) {
             }
             innerHTML += `</div>`;
         }
+        else if('resultField' in action){
+            innerHTML += `<div>`;
+            innerHTML += `<span id="${iCon}-${iAct}-${action.id}" class="conditionActionResult"></span>`;
+            var equationId = action.equation;
+            innerHTML += `<b>ADD</b> ${getFieldLabel(equationId.substring(1, equationId.length - 1))} to ${getFieldLabel(action.resultField)}`;
+            innerHTML += `</div>`;
+        }
+        else{
+            console.log("Couldn't find");
+            console.log(action);
+        }
     }
     innerHTML += "</div>"
     innerHTML += "</div>"
