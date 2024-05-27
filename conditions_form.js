@@ -20,7 +20,7 @@ async function start() {
     conditionListElement.style.left = "0px";
     conditionListElement.id = "conditionListElement";
     document.body.appendChild(conditionListElement);
-    // conditionListElement.classList.add("conditionsListHide");
+    conditionListElement.classList.add("conditionsListHide");
     var conditionListBar = document.createElement("div");
     conditionListBar.id = "conditionListBar";
     conditionListBar.innerHTML = "Conditions:"
@@ -56,7 +56,8 @@ async function start() {
 
 let operatorObj = {
     "notEquals": "IS NOT EQUAL TO",
-    "isFilled": "IS FILLED"
+    "isFilled": "IS FILLED",
+    "isEmpty": "IS EMPTY"
 };
 
 let resultOperators = [
@@ -64,4 +65,18 @@ let resultOperators = [
     "Equals"
 ];
 
+
+window.navigation.addEventListener("navigate", (event) => {
+    console.log('location changed!');
+    console.log(event);
+    console.log(event.srcElement.currentEntry.url);
+    currentUrl = event.destination.url + "";
+    console.log(typeof currentUrl);
+    if (currentUrl.includes("/settings/conditions")){
+        console.log("In conditions, starting script");
+    }
+    else{
+        console.log("Not in conditions, waiting");
+    }
+})
 start();
