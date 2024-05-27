@@ -14,10 +14,19 @@ function validateIsEmpty(term) {
             break;
 
         case "control_checkbox":
-            let boxes = field.getElementsByClassName("form-checkbox");
+            var boxes = field.getElementsByClassName("form-checkbox");
             for (var i = 0; i < boxes.length; i++) {
                 if (hasAfter(`#label_${boxes[i].id}`)) {
                     return false
+                }
+            }
+            return true;
+
+        case "control_fullname":
+            var boxes = field.getElementsByClassName("form-textbox");
+            for (var i = 0; i < boxes.length; i++) {
+                if (boxes[i].value.length > 0) {
+                    return false;
                 }
             }
             return true;

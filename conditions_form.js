@@ -36,7 +36,7 @@ async function start() {
         conditionList.appendChild(conditionLi);
     }
 
-    var delayTime = 180;
+    var delayTime = 200;
     document.body.addEventListener('click', function (event) {
         setTimeout(function () {
             updateList();
