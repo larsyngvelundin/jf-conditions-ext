@@ -13,7 +13,7 @@ async function updateList() {
             case "notEquals":
                 currentStatus = validateNotEquals(term);
                 break;
-            case "Equals":
+            case "equals":
                 currentStatus = validateEquals(term);
                 break;
             case "isFilled":

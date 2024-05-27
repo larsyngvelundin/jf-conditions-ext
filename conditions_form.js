@@ -55,6 +55,7 @@ async function start() {
 }
 
 let operatorObj = {
+    "equals": "IS EQUAL TO",
     "notEquals": "IS NOT EQUAL TO",
     "isFilled": "IS FILLED",
     "isEmpty": "IS EMPTY"
@@ -62,7 +63,7 @@ let operatorObj = {
 
 let resultOperators = [
     "notEquals",
-    "Equals"
+    "equals"
 ];
 
 
