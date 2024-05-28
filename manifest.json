@@ -39,6 +39,7 @@
                 "modules/termValidation/validateIsEmpty.js",
                 "modules/termValidation/validateNotContains.js",
                 "modules/termValidation/validateNotEquals.js",
+                "modules/termValidation/validateNotStartsWith.js",
                 "modules/termValidation/validateStartsWith.js",
                 "conditions_form.js"
             ],
