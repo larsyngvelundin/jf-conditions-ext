@@ -24,6 +24,10 @@ async function updateList() {
                 break;
             case "contains":
                 currentStatus = validateContains(term);
+                break;
+            case "notContains":
+                currentStatus = validateNotContains(term);
+                break;
         }
         if (currentStatus) {
             resultElements[iEl].innerHTML = "✅";
