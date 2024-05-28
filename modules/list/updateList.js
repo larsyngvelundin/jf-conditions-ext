@@ -28,6 +28,9 @@ async function updateList() {
             case "notContains":
                 currentStatus = validateNotContains(term);
                 break;
+            case "startsWith":
+                currentStatus = validateStartsWith(term);
+                break;
         }
         if (currentStatus) {
             resultElements[iEl].innerHTML = "✅";
