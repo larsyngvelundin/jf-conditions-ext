@@ -60,14 +60,16 @@ let operatorObj = {
     "isFilled": "IS FILLED",
     "isEmpty": "IS EMPTY",
     "contains": "CONTAINS",
-    "notContains": "DOESN'T CONTAIN"
+    "notContains": "DOESN'T CONTAIN",
+    "startsWith": "STARTS WITH"
 };
 
 let resultOperators = [
     "notEquals",
     "equals",
     "contains",
-    "notContains"
+    "notContains",
+    "startsWith"
 ];
 
 
