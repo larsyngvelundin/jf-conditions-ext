@@ -34,6 +34,9 @@ async function updateList() {
             case "notStartsWith":
                 currentStatus = validateNotStartsWith(term);
                 break;
+            case "endsWith":
+                currentStatus = validateEndsWith(term);
+                break;
         }
         if (currentStatus) {
             resultElements[iEl].innerHTML = "✅";

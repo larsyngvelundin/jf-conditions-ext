@@ -62,7 +62,8 @@ let operatorObj = {
     "contains": "CONTAINS",
     "notContains": "DOESN'T CONTAIN",
     "startsWith": "STARTS WITH",
-    "notStartsWith": "DOESN'T START WITH"
+    "notStartsWith": "DOESN'T START WITH",
+    "endsWith": "ENDS WITH"
 };
 
 let resultOperators = [
@@ -71,7 +72,8 @@ let resultOperators = [
     "contains",
     "notContains",
     "startsWith",
-    "notStartsWith"
+    "notStartsWith",
+    "endsWith"
 ];
 
 
