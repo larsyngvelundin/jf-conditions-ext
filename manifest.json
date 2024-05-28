@@ -39,6 +39,7 @@
                 "modules/termValidation/validateIsFilled.js",
                 "modules/termValidation/validateIsEmpty.js",
                 "modules/termValidation/validateNotContains.js",
+                "modules/termValidation/validateNotEndsWith.js",
                 "modules/termValidation/validateNotEquals.js",
                 "modules/termValidation/validateNotStartsWith.js",
                 "modules/termValidation/validateStartsWith.js",
