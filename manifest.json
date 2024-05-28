@@ -33,6 +33,7 @@
                 "modules/list/toggleList.js",
                 "modules/list/resultOfTerm.js",
                 "modules/list/updateList.js",
+                "modules/termValidation/validateContains.js",
                 "modules/termValidation/validateEquals.js",
                 "modules/termValidation/validateIsFilled.js",
                 "modules/termValidation/validateIsEmpty.js",
