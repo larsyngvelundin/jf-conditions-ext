@@ -3,6 +3,7 @@ function validateIsEmpty(term) {
     var field = JotForm.getFieldFromID(term.field);
     var fieldType = field.dataset.type;
     switch (fieldType) {
+        case "control_email":
         case "control_textbox":
             currentInput = field.getElementsByTagName("input")[0].value;
             if (currentInput) {
@@ -11,7 +12,6 @@ function validateIsEmpty(term) {
             else {
                 return true;
             }
-            break;
 
         case "control_checkbox":
             var boxes = field.getElementsByClassName("form-checkbox");
