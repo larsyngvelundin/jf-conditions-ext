@@ -59,13 +59,15 @@ let operatorObj = {
     "notEquals": "IS NOT EQUAL TO",
     "isFilled": "IS FILLED",
     "isEmpty": "IS EMPTY",
-    "contains": "CONTAINS"
+    "contains": "CONTAINS",
+    "notContains": "DOESN'T CONTAIN"
 };
 
 let resultOperators = [
     "notEquals",
     "equals",
-    "contains"
+    "contains",
+    "notContains"
 ];
 
 
