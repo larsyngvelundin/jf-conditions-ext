@@ -4,6 +4,7 @@ function validateIsFilled(term) {
     var fieldType = field.dataset.type;
     console.log("Trying to check field type:", fieldType);
     switch (fieldType) {
+        case "control_email":
         case "control_textbox":
             currentInput = field.getElementsByTagName("input")[0].value;
             if (currentInput == "") {
@@ -12,12 +13,11 @@ function validateIsFilled(term) {
             else {
                 return true;
             }
-            break;
 
         case "control_checkbox":
             var boxes = field.getElementsByClassName("form-checkbox");
             for (var i = 0; i < boxes.length; i++) {
-                if (hasAfter(`#label_${boxes[i].id}`)){
+                if (hasAfter(`#label_${boxes[i].id}`)) {
                     return true
                 }
             }
@@ -25,7 +25,7 @@ function validateIsFilled(term) {
         case "control_fullname":
             var boxes = field.getElementsByClassName("form-textbox");
             for (var i = 0; i < boxes.length; i++) {
-                if (boxes[i].value.length > 0){
+                if (boxes[i].value.length > 0) {
                     return true;
                 }
             }
