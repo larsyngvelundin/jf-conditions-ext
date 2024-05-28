@@ -23,11 +23,9 @@ function validateIsEmpty(term) {
             return true;
 
         case "control_fullname":
-            var boxes = field.getElementsByClassName("form-textbox");
-            for (var i = 0; i < boxes.length; i++) {
-                if (boxes[i].value.length > 0) {
-                    return false;
-                }
+        case "control_address":
+            if (validateIsFilled(term)) {
+                return false;
             }
             return true;
     }
