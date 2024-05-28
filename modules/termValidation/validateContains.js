@@ -8,7 +8,13 @@ function validateContains(term) {
         targetField = JotForm.getFieldFromID(targetFieldId);
         
         switch (fieldType) {
-            
+            case "control_email":
+                currentValue = field.getElementsByTagName("input")[0].value;
+                targetFieldValue = targetField.getElementsByTagName("input")[0].value;
+                if (targetFieldValue && currentValue.includes(targetFieldValue)){
+                    return true;
+                }
+                return false;
         }
     }
     else {
