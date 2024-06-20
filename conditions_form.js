@@ -1,6 +1,6 @@
 console.log("Loaded script");
 
-async function start() {
+async function startInForm() {
     await waitForElm(".form-all");
 
     addCss();
@@ -65,6 +65,7 @@ let operatorObj = {
     "notStartsWith": "DOESN'T START WITH",
     "endsWith": "ENDS WITH",
     "notEndsWith": "DOESN'T END WITH",
+    "equalCountry": "COUNTRY EQUALS",
 };
 
 let resultOperators = [
@@ -75,7 +76,8 @@ let resultOperators = [
     "startsWith",
     "notStartsWith",
     "endsWith",
-    "notEndsWith"
+    "notEndsWith",
+    "equalCountry"
 ];
 
 
@@ -87,9 +89,18 @@ window.navigation.addEventListener("navigate", (event) => {
     console.log(typeof currentUrl);
     if (currentUrl.includes("/settings/conditions")){
         console.log("In conditions, starting script");
+        startInBuilder();
+
     }
     else{
         console.log("Not in conditions, waiting");
     }
 })
-start();
+
+if(!document.location.href.includes("build")){
+    startInForm();
+}
+else if(document.location.href.includes("/settings/conditions")){
+    console.log("In conditions, starting script");
+    startInBuilder();
+}
