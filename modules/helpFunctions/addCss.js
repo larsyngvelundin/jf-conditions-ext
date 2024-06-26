@@ -56,7 +56,21 @@ function addCss() {
         line-height: 1.618em;
         list-style: none;
     }
+    .conditionWarningIcon::before{
+        content: "!";
+        position: absolute;
+        right: 10px;
+        top: 4px;
+        color: red;
+    }
 
+    .conflictCondition{
+    border: red dotted 1px;
+    }
+
+    .conflictConditionHover{
+    border: red solid 2px !important;
+    }
 `;
     document.body.appendChild(ConditionListStyles);
 }
