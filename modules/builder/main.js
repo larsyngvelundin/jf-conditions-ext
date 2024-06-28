@@ -1,12 +1,12 @@
-async function startInBuilder(){
+async function startInBuilder() {
 
-    
+
     // let htmlContent = document.innerHTML;
     // console.log("content:",htmlContent);
-    
-    
+
+
     let conditionsListElement = await waitForElm('.listGroup-content');
-    
+
     console.log("found condition list element");
     console.log(conditionsListElement);
     let conditionElements = conditionsListElement.getElementsByClassName("mediaBox");
@@ -17,7 +17,7 @@ async function startInBuilder(){
     let conditions = await fetchFormProps(htmlContent);
     conditions = conditions.conditions;
     let questionProps = await fetchQuestionsProps(htmlContent);
-    console.log("conditions",conditions);
+    console.log("conditions", conditions);
     // console.log("questionProps",questionProps);
 
     var warningIcon = document.createElement("div");
@@ -40,15 +40,25 @@ async function startInBuilder(){
                             conditions[iCon2].action[iAct2].field
                             && getActionType(conditions[iCon].action[iAct].visibility) ==
                             getActionType(conditions[iCon2].action[iAct2].visibility)) {
+
                             console.log("SAME FIELD SAME ACTION");
                             console.log(conditions[iCon].action[iAct]);
                             // conditionElements[iCon].style.backgroundColor = "red";
-                            let className = `conflict-${iCon}-${iAct}_${iCon2}-${iAct2}`;
+                            // let className = `conflict-${iCon}-${iAct}_${iCon2}-${iAct2}`;
+                            let className = `conflict-${conditions[iCon].action[iAct].field}-${getActionType(conditions[iCon].action[iAct].visibility)}`;
                             conditionElements[iCon].classList.add(className);
                             conditionElements[iCon2].classList.add(className);
-                            addHoverEffect(className);
+                            addHoverEffect(conditionElements[iCon]);
+                            addHoverEffect(conditionElements[iCon2]);
+                            let actionElements = conditionElements[iCon].querySelectorAll(".content-infos.do");
+                            actionElements[iAct].classList.add(className);
+                            addHoverEffect(actionElements[iAct]);
+                            let actionElements2 = conditionElements[iCon2].querySelectorAll(".content-infos.do");
+                            actionElements2[iAct2].classList.add(className);
+                            addHoverEffect(actionElements2[iAct2]);
+
                             // conditionElements[iCon].classList.add(className);
-                        
+
 
                             //add an icon to warn
                             console.log(conditionElements[iCon]);
@@ -69,6 +79,7 @@ async function startInBuilder(){
                 //add a class to the to the condition element
                 //if possible also on the action element
             }
+            addHoverEffect(conditionElements[iCon]);
         }
     }
     //check for changes to the checkboxes, if a condition is selected, add the hovereffect for the conflicts
