@@ -18,7 +18,6 @@ function addCss() {
         position: relative;
     }
 
-
     #conditionListElement {
         position: absolute;
         z-index: 9;
@@ -40,7 +39,6 @@ function addCss() {
         background-color: #2196F3;
         color: #fff;
     }
-    
 
     .collapsible{
         vertical-align: top;
@@ -56,6 +54,7 @@ function addCss() {
         line-height: 1.618em;
         list-style: none;
     }
+
     .conditionWarningIcon::before{
         content: "!";
         position: absolute;
@@ -63,14 +62,24 @@ function addCss() {
         top: 4px;
         color: red;
     }
+    li.mediaBox, div.content-infos{
+        border: #ffffff00 solid 2px !important;
+        box-sizing: border-box;
+    }
 
     .conflictCondition{
-    border: red dotted 1px;
+        border: red dotted 1px;
     }
 
-    .conflictConditionHover{
-    border: red solid 2px !important;
+    li.conflictConditionHover{
+        border: red solid 2px !important;
+        border-radius: 3px;
     }
+
+    div.conflictConditionHover{
+        border: orange solid 2px !important;
+    }
+
 `;
     document.body.appendChild(ConditionListStyles);
 }
