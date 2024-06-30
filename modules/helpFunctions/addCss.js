@@ -75,9 +75,12 @@ function addCss() {
         border: red solid 2px !important;
         border-radius: 3px;
     }
-
     div.conflictConditionHover{
         border: orange solid 2px !important;
+    }
+
+    li.conflictConditionHover.conflictConditionHoverOverride, div.conflictConditionHover.conflictConditionHoverOverride{
+        border: #ffffff00 solid 2px !important;
     }
 
 `;
