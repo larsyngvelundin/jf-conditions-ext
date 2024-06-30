@@ -21,10 +21,11 @@
             "js": [
                 "modules/actionValidation/validateHide.js",
                 "modules/actionValidation/validateShow.js",
-                "modules/builder/main.js",
                 "modules/builder/fetchFormProps.js",
                 "modules/builder/fetchHtmlContent.js",
                 "modules/builder/fetchQuestionsProps.js",
+                "modules/builder/main.js",
+                "modules/builder/preprocessConditions.js",
                 "modules/helpFunctions/addCollapsible.js",
                 "modules/helpFunctions/addCss.js",
                 "modules/helpFunctions/addHoverEffect.js",
