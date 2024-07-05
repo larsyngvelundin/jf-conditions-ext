@@ -22,12 +22,36 @@ async function startInBuilder() {
     warningIcon.classList.add("conditionWarningIcon");
     warningIcon.innerHTML = "!";
 
+    for (let iCon = 0; iCon < conditions.length; iCon++) {
+        // //Use clone to remove eventListeners for now
+        // let cur_element = conditionElements[iCon].getElementsByClassName("mediaBox-content")[0];
+        // let clone_element = cur_element.cloneNode(true);
+
+        // //save the current buttons
+        // let cur_buttons = cur_element.getElementsByClassName("itemBox-actions")[0];
+        // console.log("Found this cur_buttons:", cur_buttons);
+        // //replace clone buttons with current buttons
+        // let clone_buttons = clone_element.getElementsByClassName("itemBox-actions")[0];
+        // // clone_buttons.parentNode.replaceChild(cur_buttons, clone_buttons);
+
+        // //save current mediaBox-contenthover
+        // let cur_contenthover = cur_element.getElementsByClassName("mediaBox-contenthover")[0];
+        // console.log("Found this contenthover:", cur_contenthover);
+        // //replace clone
+        // // let clone_contenthover = clone_element.getElementsByClassName("mediaBox-contenthover")[0];
+        // // clone_contenthover.parentNode.replaceChild(cur_contenthover, clone_contenthover);
+
+        // //replace current element with the new clone
+        // // cur_element.parentNode.replaceChild(clone_element, cur_element);
+
+        let cur_element = conditionElements[iCon].getElementsByClassName("mediaBox-contentmain")[0];
+        // console.log("Found this cur_element:", cur_element);
+        let clone_element = cur_element.cloneNode(true);
+        cur_element.parentNode.replaceChild(clone_element, cur_element);
+    }
+
     for (let iCon = 0; iCon < conditions.length - 1; iCon++) {
 
-        //Use clone to remove eventListeners for now
-        let cur_element = conditionElements[iCon].getElementsByClassName("mediaBox-content")[0];
-        let new_element = cur_element.cloneNode(true);
-        cur_element.parentNode.replaceChild(new_element, cur_element);
 
         // // console.log(`Condition ${iCon}`, conditions[iCon]);
         // var conditionLi = getConditionLi(conditions[iCon], iCon);
@@ -155,8 +179,8 @@ async function startInBuilder() {
     }
 
     let conflictElements = conditionsListElement.getElementsByClassName("possibleConflict")
-    console.log("found this many possible conflict elements", conflictElements.length);
-    console.log("list:", conflictElements);
+    // console.log("found this many possible conflict elements", conflictElements.length);
+    // console.log("list:", conflictElements);
     for (let index = 0; index < conflictElements.length; index++) {
         const element = conflictElements[index];
         addHoverEffect(element);

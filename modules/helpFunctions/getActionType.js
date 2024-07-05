@@ -5,6 +5,7 @@ function getActionType(action) {
         // // console.log("action", action);
         switch (actionType) {
             case "Show":
+            case "ShowMultiple":
             case "Hide":
             case "HideMultiple":
                 return "ShowHide";

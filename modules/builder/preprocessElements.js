@@ -31,6 +31,7 @@ function preprocessElements(elementList, conditions, questions) {
             }
             moreElement.remove();
 
+
             //Check Actions
 
 
@@ -62,6 +63,15 @@ function preprocessElements(elementList, conditions, questions) {
                 // // console.log(newTermElement);
             }
             moreElement.remove();
+            
+            //remove expand button if it's there
+            let expandElement = elementList[iCon].getElementsByClassName("expand-condition-block")[0];
+            try{
+                expandElement.remove();
+            }
+            catch{
+                //
+            }
         }
 
 

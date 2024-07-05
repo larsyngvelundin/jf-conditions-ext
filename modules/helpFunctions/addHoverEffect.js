@@ -1,6 +1,6 @@
 function addHoverEffect(element) {
     // console.log("Trying to add hover for ", element);
-    if(element.classList.contains("conditionExtHoverCheck")){
+    if (element.classList.contains("conditionExtHoverCheck")) {
         // if(element.classList.contains("content-infos")){
         //     console.log("It's an");
         // }
@@ -100,22 +100,17 @@ function addHoverEffect(element) {
         }
     };
     element.addEventListener("click", function (e) {
-        // console.log("element clicked");
-        element.classList.toggle("conditionClicked");
-        // console.log("Is clicked?", element.classList.contains("conditionClicked"));
-        // console.log(element);
-        if (element.classList.contains("conditionClicked")) {
-            clickToggle = true;
-            addConflictClass();
-            // console.log("Adding hover effects");
+        if (clickToggle) {
+            if (element.classList.contains("conditionClicked")) {
+                element.classList.remove("conditionClicked");
+                clickToggle = false;
+            }
         }
         else {
-            clickToggle = false;
-
-            // removeConflictClass();
-            // console.log("Removing hover effects");
+            element.classList.add("conditionClicked");
+            clickToggle = true;
+            addConflictClass();
         }
-
     }, false);
 
     element.classList.add("conditionExtHoverCheck");
