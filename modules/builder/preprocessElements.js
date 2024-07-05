@@ -134,6 +134,11 @@ function getActionText(action, questions) {
             case "ShowMultiple":
             case "Show":
                 return `<b> Show </b><span class=""></span> <span>${questions[action.field].text}</span>`;
+            case "UnrequireMultiple":
+            case "RequireMultiple":
+            case "Unrequire":
+            case "Require":
+                return "not yet added"
         }
         return `'${actionType}' (not yet added)`;
     }
@@ -141,7 +146,7 @@ function getActionText(action, questions) {
 
     }
     else if (action.hasOwnProperty("newCalculationType")) {
-        return "INSERT";
+        return "(not yet added)";
     }
     return `(Action type not yet added)`;
 }
@@ -156,6 +161,11 @@ function getActionSvgPath(action) {
             case "Hide":
             case "HideMultiple":
                 return 'M3.293 3.293a1 1 0 0 1 1.414 0l16 16a1 1 0 0 1-1.414 1.414l-16-16a1 1 0 0 1 0-1.414Zm13.046 14.461.728.728C15.636 19.372 13.938 20 12 20c-2.721 0-4.967-1.239-6.669-2.698-1.7-1.458-2.89-3.164-3.512-4.174a2.136 2.136 0 0 1 0-2.256c.62-1.005 1.8-2.699 3.487-4.152l.71.709 2.538 2.54a4 4 0 0 0 5.478 5.478l2.308 2.307Zm-.347-6a4 4 0 0 0-3.747-3.747L9.211 4.973l-.39-.39A9.032 9.032 0 0 1 11.998 4c2.722 0 4.968 1.239 6.67 2.698 1.7 1.458 2.89 3.164 3.512 4.174.429.697.429 1.56 0 2.256a19.216 19.216 0 0 1-2.061 2.754l-.354-.354-3.774-3.774Zm-5.925-.272a2 2 0 0 0 2.45 2.45l-2.45-2.45Z';
+            case "UnrequireMultiple":
+            case "RequireMultiple":
+            case "Unrequire":
+            case "Require":
+                return "M12 4a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L14 12l4.562 2.634a1 1 0 0 1-1 1.732L13 13.732V19a1 1 0 1 1-2 0v-5.268l-4.563 2.634a1 1 0 1 1-1-1.732L10 12 5.437 9.366a1 1 0 0 1 1-1.732L11 10.268V5a1 1 0 0 1 1-1Z";
         }
     }
     else if (action.hasOwnProperty("skipHide")) {
