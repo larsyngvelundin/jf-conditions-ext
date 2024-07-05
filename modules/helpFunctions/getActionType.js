@@ -1,13 +1,24 @@
 function getActionType(action) {
     if (action.hasOwnProperty("visibility")) {
         let actionType = action.visibility;
-        console.log("actionType", actionType);
+        // console.log("actionType", actionType);
+        // console.log("action", action);
         switch (actionType) {
             case "Show":
             case "Hide":
             case "HideMultiple":
                 return "ShowHide";
-                // return "ShowHideMultiple";
+            // return "ShowHideMultiple";
+            case "Enable":
+            case "Disable":
+                return "EnableDisable";
+            case "UnrequireMultiple":
+            case "RequireMultiple":
+            case "Unrequire":
+            case "Require":
+                return "RequireUnrequire";
+            case "Mask":
+                return "Mask";
         }
         return "null";
     }
