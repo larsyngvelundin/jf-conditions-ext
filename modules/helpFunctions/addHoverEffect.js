@@ -37,9 +37,9 @@ function addHoverEffect(element) {
             // }
         }
         if(element.classList.contains("content-infos")){
-            console.log("Hovering directly on action");
+            // console.log("Hovering directly on action");
             let conflictClass = getClassListStr().slice(1);
-            console.log("conflictClass", conflictClass);
+            // console.log("conflictClass", conflictClass);
             let conditionsListElement = document.getElementsByClassName('listGroup-content')[0];
             let actionElements = conditionsListElement.getElementsByClassName("content-infos");
             for (var iActive = 0; iActive < actionElements.length; iActive++){

@@ -1,9 +1,7 @@
 async function startInBuilder() {
-    
 
     // let htmlContent = document.innerHTML;
     // console.log("content:",htmlContent);
-
 
     let conditionsListElement = await waitForElm('.listGroup-content');
 
@@ -14,9 +12,8 @@ async function startInBuilder() {
     // console.log(conditionElements);
 
     // console.log("Before preprocess", conditions);
-    
-    // console.log("After preprocess", conditions);
 
+    // console.log("After preprocess", conditions);
 
     // // var conditions = __formProps.conditions;
     let htmlContent = await fetchHtmlContent();
@@ -30,7 +27,6 @@ async function startInBuilder() {
     // console.log("conditions", conditions);
     // console.log("questionProps",questionProps);
 
-    
     await preprocessElements(conditionElements, conditions, questionProps);
 
     var warningIcon = document.createElement("div");
@@ -124,6 +120,32 @@ async function startInBuilder() {
                             }
                         }
                     }
+                }
+            }
+        }
+        else if (conditions[iCon].type == "page") {
+            for (let iCon2 = iCon + 1; iCon2 < conditions.length; iCon2++) {
+                if (conditions[iCon].action[0].skipHide ==
+                    conditions[iCon2].action[0].skipHide &&
+                    conditions[iCon].action[0].skipTo ==
+                    conditions[iCon2].action[0].skipTo) {
+                        let className = `conflict-${conditions[iCon].action[0].skipHide}-${conditions[iCon].action[0].skipTo}`;
+                        conditionElements[iCon].classList.add(className);
+                        conditionElements[iCon2].classList.add(className);
+                        addHoverEffect(conditionElements[iCon]);
+                        addHoverEffect(conditionElements[iCon2]);
+                        let actionElements = conditionElements[iCon].querySelectorAll(".content-infos.do");
+                        actionElements[0].classList.add(className);
+                        addHoverEffect(actionElements[0]);
+                        let actionElements2 = conditionElements[iCon2].querySelectorAll(".content-infos.do");
+                        actionElements2[0].classList.add(className);
+                        addHoverEffect(actionElements2[0]);
+                        if (conditionElements[iCon].getElementsByClassName("conditionWarningIcon").length == 0) {
+                            conditionElements[iCon].appendChild(warningIcon.cloneNode());
+                        }
+                        if (conditionElements[iCon2].getElementsByClassName("conditionWarningIcon").length == 0) {
+                            conditionElements[iCon2].appendChild(warningIcon.cloneNode());
+                        }
                 }
             }
         }
