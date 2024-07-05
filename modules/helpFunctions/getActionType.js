@@ -29,7 +29,7 @@ function getActionType(action) {
             case "hidePage":
                 return "skipHide";
         }
-        return "null";
+        return "null-skipHide";
     }
     else if (action.hasOwnProperty("newCalculationType")) {
         return "calculation";
