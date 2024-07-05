@@ -6,12 +6,12 @@ async function fetchQuestionsProps(htmlContent) {
         let questionPropsString = match[1];
         try {
             questionProps = JSON.parse(questionPropsString);
-            // console.log("questionProps", questionProps);
+            // // console.log("questionProps", questionProps);
         } catch (error) {
             console.error('Error parsing questionProps:', error);
         }
     } else {
-        console.log('The variable window.__questionProps was not found in the HTML content.');
+        // console.log('The variable window.__questionProps was not found in the HTML content.');
     }
     return questionProps;
 }

@@ -1,14 +1,14 @@
 function preprocessElements(elementList, conditions, questions) {
-    console.log("Processing Elements");
-    console.log("elementList", elementList);
-    console.log("conditions", conditions);
-    console.log("questions", questions);
+    // console.log("Processing Elements");
+    // console.log("elementList", elementList);
+    // console.log("conditions", conditions);
+    // console.log("questions", questions);
 
     for (let iCon = 0; iCon < conditions.length; iCon++) {
         //Check Terms
         let termElementCount = elementList[iCon].getElementsByClassName("if").length;
-        console.log("Found this many term elements:", termElementCount);
-        console.log("Found this many terms in condition:", conditions[iCon].terms.length);
+        // console.log("Found this many term elements:", termElementCount);
+        // console.log("Found this many terms in condition:", conditions[iCon].terms.length);
         if (termElementCount != conditions[iCon].terms.length) {
             //for simplicity's sake, delete current term elements
             let termElements = elementList[iCon].getElementsByClassName("if");
@@ -17,17 +17,17 @@ function preprocessElements(elementList, conditions, questions) {
             }
 
 
-            console.log("There's elements to be unfolded for condition:", iCon);
+            // console.log("There's elements to be unfolded for condition:", iCon);
             let moreElement = elementList[iCon].getElementsByClassName("more")[0];
-            console.log("The more element?", moreElement);
+            // console.log("The more element?", moreElement);
             //What even is this selector
             let spanElement = elementList[iCon].getElementsByClassName("content")[0].getElementsByTagName("span")[0];
-            console.log("The  spanElement?", spanElement);
+            // console.log("The  spanElement?", spanElement);
             for (let iTer = 0; iTer < conditions[iCon].terms.length; iTer++) {
 
                 let newTermElement = createTermElement(conditions[iCon].terms[iTer], questions);
                 spanElement.insertBefore(newTermElement, moreElement);
-                // console.log(newTermElement);
+                // // console.log(newTermElement);
             }
             moreElement.remove();
 
@@ -39,11 +39,11 @@ function preprocessElements(elementList, conditions, questions) {
 
 
         let actionElementCount = elementList[iCon].getElementsByClassName("do").length;
-        console.log("Found this many action elements:", actionElementCount);
-        console.log("Found this many actions in condition:", conditions[iCon].action.length);
+        // console.log("Found this many action elements:", actionElementCount);
+        // console.log("Found this many actions in condition:", conditions[iCon].action.length);
 
         if (actionElementCount != conditions[iCon].action.length) {
-            console.log("There's elements to be unfolded for condition:", iCon);
+            // console.log("There's elements to be unfolded for condition:", iCon);
             //for simplicity's sake, delete current action elements
             let actionElements = elementList[iCon].getElementsByClassName("do");
             for (let iAct = actionElements.length - 1; iAct >= 0; iAct--) {
@@ -51,15 +51,15 @@ function preprocessElements(elementList, conditions, questions) {
             }
 
             let moreElement = elementList[iCon].getElementsByClassName("more")[0];
-            console.log("The more element?", moreElement);
+            // console.log("The more element?", moreElement);
             //What even is this selector
             let spanElement = elementList[iCon].getElementsByClassName("content")[0].getElementsByTagName("span")[0];
-            console.log("The  spanElement?", spanElement);
+            // console.log("The  spanElement?", spanElement);
             for (let iAct = 0; iAct < conditions[iCon].action.length; iAct++) {
 
                 let newActionElement = createActionElement(conditions[iCon].action[iAct], questions);
                 spanElement.insertBefore(newActionElement, moreElement);
-                // console.log(newTermElement);
+                // // console.log(newTermElement);
             }
             moreElement.remove();
         }

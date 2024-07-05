@@ -2,7 +2,7 @@ function validateEndsWith(term) {
     var field = JotForm.getFieldFromID(term.field);
     var fieldType = field.dataset.type;
     var equalToField = term.value[0] == "{" && term.value.slice(-1) == "}";
-    console.log("validateEndsWith term:", term);
+    // console.log("validateEndsWith term:", term);
     if (equalToField) {
         targetFieldId = JotForm.getFieldIdFromFieldRef(term.value);
         targetField = JotForm.getFieldFromID(targetFieldId);

@@ -2,7 +2,7 @@ function validateContains(term) {
     var field = JotForm.getFieldFromID(term.field);
     var fieldType = field.dataset.type;
     var equalToField = term.value[0] == "{" && term.value.slice(-1) == "}";
-    console.log("DoesContain term:", term);
+    // console.log("DoesContain term:", term);
     if (equalToField) {
         targetFieldId = JotForm.getFieldIdFromFieldRef(term.value);
         targetField = JotForm.getFieldFromID(targetFieldId);

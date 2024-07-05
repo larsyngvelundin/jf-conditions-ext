@@ -1,6 +1,6 @@
 function validateNotEquals(term) {
-    console.log("Checking a notEquals term");
-    console.log(term);
+    // console.log("Checking a notEquals term");
+    // console.log(term);
     fieldElement = JotForm.getFieldFromID(term.field);
     var fieldType = fieldElement.dataset.type;
 

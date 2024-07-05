@@ -1,4 +1,4 @@
-console.log("Loaded script");
+// // console.log("Loaded script");
 
 async function startInForm() {
     await waitForElm(".form-all");
@@ -31,7 +31,7 @@ async function startInForm() {
     let calculations = JotForm.calculations;
 
     for (let iCon = 0; iCon < conditions.length; iCon++) {
-        console.log(`Condition ${iCon}`, conditions[iCon]);
+        // console.log(`Condition ${iCon}`, conditions[iCon]);
         var conditionLi = getConditionLi(conditions[iCon], iCon);
         conditionList.appendChild(conditionLi);
     }
@@ -82,18 +82,18 @@ let resultOperators = [
 
 
 window.navigation.addEventListener("navigate", (event) => {
-    console.log('location changed!');
-    console.log(event);
-    console.log(event.srcElement.currentEntry.url);
+    // console.log('location changed!');
+    // console.log(event);
+    // console.log(event.srcElement.currentEntry.url);
     currentUrl = event.destination.url + "";
-    console.log(typeof currentUrl);
+    // console.log(typeof currentUrl);
     if (currentUrl.includes("/settings/conditions")){
-        console.log("In conditions, starting script");
+        // console.log("In conditions, starting script");
         startInBuilder();
 
     }
     else{
-        console.log("Not in conditions, waiting");
+        // console.log("Not in conditions, waiting");
     }
 })
 
@@ -101,6 +101,6 @@ if(!document.location.href.includes("build")){
     startInForm();
 }
 else if(document.location.href.includes("/settings/conditions")){
-    console.log("In conditions, starting script");
+    // console.log("In conditions, starting script");
     startInBuilder();
 }

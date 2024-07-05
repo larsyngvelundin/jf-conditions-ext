@@ -1,8 +1,8 @@
 function getActionType(action) {
     if (action.hasOwnProperty("visibility")) {
         let actionType = action.visibility;
-        // console.log("actionType", actionType);
-        // console.log("action", action);
+        // // console.log("actionType", actionType);
+        // // console.log("action", action);
         switch (actionType) {
             case "Show":
             case "Hide":
@@ -24,7 +24,7 @@ function getActionType(action) {
     }
     else if (action.hasOwnProperty("skipHide")) {
         let actionType = action.skipHide;
-        console.log("actionType", actionType);
+        // console.log("actionType", actionType);
         switch (actionType) {
             case "hidePage":
                 return "skipHide";
@@ -35,7 +35,7 @@ function getActionType(action) {
         return "calculation";
     }
     else {
-        console.log("Found edge case");
-        console.log(action);
+        // console.log("Found edge case");
+        // console.log(action);
     }
 }

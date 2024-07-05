@@ -1,5 +1,5 @@
 async function updateList() {
-    console.log("Updating list");
+    // console.log("Updating list");
     //Updating Term results
     var resultElements = document.getElementsByClassName("conditionTermResult");
     for (let iEl = 0; iEl < resultElements.length; iEl++) {
@@ -7,7 +7,7 @@ async function updateList() {
         var iCon = parts[0];
         var iTer = parts[1];
         var term = JotForm.conditions[iCon].terms[iTer];
-        console.log("Updating", term);
+        // console.log("Updating", term);
         var currentStatus;
         switch (term.operator) {
             case "notEquals":
@@ -51,12 +51,12 @@ async function updateList() {
     //Updating Action results (Still using currentlyTrue)
     resultElements = document.getElementsByClassName("conditionActionResult");
     for (let iEl = 0; iEl < resultElements.length; iEl++) {
-        console.log(resultElements[iEl].id);
+        // console.log(resultElements[iEl].id);
         var parts = resultElements[iEl].id.split("-");
         var iCon = parts[0];
         var iAct = parts[1];
         var action = JotForm.conditions[iCon].action[iAct];
-        console.log("Checking action:", action);
+        // console.log("Checking action:", action);
         var actionType = action.visibility;
         var currentStatus;
         switch (actionType) {
