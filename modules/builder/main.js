@@ -1,3 +1,4 @@
+var clickToggle = false; //find better solution for later
 async function startInBuilder() {
 
     // let htmlContent = document.innerHTML;
@@ -34,6 +35,12 @@ async function startInBuilder() {
     warningIcon.innerHTML = "!";
 
     for (let iCon = 0; iCon < conditions.length - 1; iCon++) {
+
+        //Use clone to remove eventListeners for now
+        let cur_element = conditionElements[iCon].getElementsByClassName("mediaBox-content")[0];
+        let new_element = cur_element.cloneNode(true);
+        cur_element.parentNode.replaceChild(new_element, cur_element);
+
         // console.log(`Condition ${iCon}`, conditions[iCon]);
         // var conditionLi = getConditionLi(conditions[iCon], iCon);
         // conditionList.appendChild(conditionLi);
