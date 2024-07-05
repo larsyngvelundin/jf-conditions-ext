@@ -1,6 +1,6 @@
 function preprocessConditions(conditions){
     for (let iCon = 0; iCon < conditions.length; iCon++) {
-        if (conditions[iCon].type == "field") {
+        if (conditions[iCon].type == "field" || conditions[iCon].type == "require") {
             for (let iAct = 0; iAct < conditions[iCon].action.length; iAct++) {
                 if (conditions[iCon].action[iAct].hasOwnProperty("fields")) {
                     let multiAction = conditions[iCon].action[iAct];
