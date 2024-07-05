@@ -26,7 +26,5 @@ function getActionType(action) {
     else {
         console.log("Found edge case");
         console.log(action);
-
     }
 }
-
