@@ -41,7 +41,7 @@ async function startInBuilder() {
         // console.log(`Condition ${iCon}`, conditions[iCon]);
         // var conditionLi = getConditionLi(conditions[iCon], iCon);
         // conditionList.appendChild(conditionLi);
-        if (conditions[iCon].type == "field") {
+        if (conditions[iCon].type == "field" || conditions[iCon].type == "require" || conditions[iCon].type == "mask") {
             // console.log("Condition type:", conditions[iCon].type);
             for (let iAct = 0; iAct < conditions[iCon].action.length; iAct++) {
                 //for each action
