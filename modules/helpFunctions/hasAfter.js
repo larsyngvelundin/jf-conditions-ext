@@ -1,5 +1,5 @@
 const hasAfter = selector => {
-    console.log("hasAfter Selector", selector);
+    // console.log("hasAfter Selector", selector);
     const el = document.querySelector(selector);
     return getComputedStyle(el, '::after').content !== 'none';
 }

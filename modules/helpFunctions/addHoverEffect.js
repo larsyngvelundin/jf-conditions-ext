@@ -15,15 +15,15 @@ function addHoverEffect(element) {
     function getClassListStr() {
         var classListStr = "";
         var classList = element.classList;
-        // console.log(" classListStr", classListStr);
+        // // console.log(" classListStr", classListStr);
         classList.forEach(classEntry => {
-            // console.log("classEntry", classEntry);
+            // // console.log("classEntry", classEntry);
             if (classEntry.indexOf("conflict-") > -1) {
                 classListStr = classListStr + "." + classEntry + ",";
             }
         });
         classListStr = classListStr.slice(0, -1);
-        // console.log("trying to show", classListStr);
+        // // console.log("trying to show", classListStr);
         return classListStr;
     }
 
@@ -33,7 +33,7 @@ function addHoverEffect(element) {
     // catch {
     //     var elms = []
     // }
-    // console.log("elms", elms);
+    // // console.log("elms", elms);
     // var n = elms.length;
     function addConflictClass() {
         // console.log("In addConflictClass");
@@ -42,7 +42,7 @@ function addHoverEffect(element) {
         // console.log(element.classList.contains("content-infos"));
         try {
             var elms = document.querySelectorAll(getClassListStr());
-            // console.log("this is the elements:", elms);
+            // // console.log("this is the elements:", elms);
         }
         catch {
             var elms = []
@@ -55,9 +55,9 @@ function addHoverEffect(element) {
         }
         //Check if hover is directly on an action
         if (element.classList.contains("content-infos")) {
-            // console.log("Hovering directly on action");
+            // // console.log("Hovering directly on action");
             let conflictClass = getClassListStr().slice(1);
-            // console.log("conflictClass", conflictClass);
+            // // console.log("conflictClass", conflictClass);
             let conditionsListElement = document.getElementsByClassName('listGroup-content')[0];
             let actionElements = conditionsListElement.getElementsByClassName("content-infos");
             for (var iActive = 0; iActive < actionElements.length; iActive++) {
@@ -89,7 +89,7 @@ function addHoverEffect(element) {
         }
     }
     element.onmouseover = function () {
-        console.log("Mouse hover, and clickToggle is", clickToggle);
+        // console.log("Mouse hover, and clickToggle is", clickToggle);
         if (!clickToggle) {
             addConflictClass();
         }
@@ -111,6 +111,7 @@ function addHoverEffect(element) {
         }
         else {
             clickToggle = false;
+
             // removeConflictClass();
             // console.log("Removing hover effects");
         }

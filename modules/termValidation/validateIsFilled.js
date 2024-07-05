@@ -1,8 +1,8 @@
 function validateIsFilled(term) {
-    console.log("Checking an isFilled term");
+    // console.log("Checking an isFilled term");
     var field = JotForm.getFieldFromID(term.field);
     var fieldType = field.dataset.type;
-    console.log("Trying to check field type:", fieldType);
+    // console.log("Trying to check field type:", fieldType);
     switch (fieldType) {
         case "control_email":
         case "control_textbox":

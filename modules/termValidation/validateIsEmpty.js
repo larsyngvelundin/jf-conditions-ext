@@ -1,5 +1,5 @@
 function validateIsEmpty(term) {
-    console.log("Checking an isFilled term");
+    // console.log("Checking an isFilled term");
     var field = JotForm.getFieldFromID(term.field);
     var fieldType = field.dataset.type;
     switch (fieldType) {
