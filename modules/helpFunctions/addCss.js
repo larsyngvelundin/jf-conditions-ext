@@ -75,8 +75,14 @@ function addCss() {
         border: red solid 2px !important;
         border-radius: 3px;
     }
+    li.conditionClicked{
+        background-color: #FFE2E3 !important;
+    }
     div.conflictConditionHover{
         border: orange solid 2px !important;
+    }
+    div.conditionClicked{
+        background-color: #FED8B1;
     }
 
     li.conflictConditionHover.conflictConditionHoverOverride, div.conflictConditionHover.conflictConditionHoverOverride{

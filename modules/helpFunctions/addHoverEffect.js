@@ -1,7 +1,17 @@
 function addHoverEffect(element) {
+    // console.log("Trying to add hover for ", element);
     if(element.classList.contains("conditionExtHoverCheck")){
+        // if(element.classList.contains("content-infos")){
+        //     console.log("It's an");
+        // }
+
+        // let cur_element = conditionElements[iCon].getElementsByClassName("mediaBox-content")[0];
+        // let new_element = cur_element.cloneNode(true);
+        // cur_element.parentNode.replaceChild(new_element, cur_element);
+        // console.log("Already had the check class");
         return;
     }
+    // console.log("Adding");
     function getClassListStr() {
         var classListStr = "";
         var classList = element.classList;
@@ -26,6 +36,10 @@ function addHoverEffect(element) {
     // // console.log("elms", elms);
     // var n = elms.length;
     function addConflictClass() {
+        // console.log("In addConflictClass");
+        // console.log(element);
+        // console.log(element.classList);
+        // console.log(element.classList.contains("content-infos"));
         try {
             var elms = document.querySelectorAll(getClassListStr());
             // // console.log("this is the elements:", elms);
@@ -39,6 +53,7 @@ function addHoverEffect(element) {
             //     elms[i].classList.remove("conflictConditionHover");
             // }
         }
+        //Check if hover is directly on an action
         if (element.classList.contains("content-infos")) {
             // // console.log("Hovering directly on action");
             let conflictClass = getClassListStr().slice(1);
@@ -96,7 +111,8 @@ function addHoverEffect(element) {
         }
         else {
             clickToggle = false;
-            removeConflictClass();
+
+            // removeConflictClass();
             // console.log("Removing hover effects");
         }
 

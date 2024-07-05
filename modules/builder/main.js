@@ -3,7 +3,7 @@ async function startInBuilder() {
 
     let conditionsListElement = await waitForElm('.listGroup-content');
     let conditionElements = conditionsListElement.getElementsByClassName("mediaBox");
-    
+
     let htmlContent = await fetchHtmlContent();
     let conditions = await fetchFormProps(htmlContent);
     conditions = preprocessConditions(conditions.conditions);
@@ -15,6 +15,7 @@ async function startInBuilder() {
     // // console.log("conditions", conditions);
     // // console.log("questionProps",questionProps);
 
+    //maybe this await doesn't do anything?
     await preprocessElements(conditionElements, conditions, questionProps);
 
     var warningIcon = document.createElement("div");
@@ -50,15 +51,23 @@ async function startInBuilder() {
                             // let className = `conflict-${iCon}-${iAct}_${iCon2}-${iAct2}`;
                             let className = `conflict-${conditions[iCon].action[iAct].field}-${getActionType(conditions[iCon].action[iAct])}`;
                             conditionElements[iCon].classList.add(className);
+                            conditionElements[iCon].classList.add("possibleConflict");
                             conditionElements[iCon2].classList.add(className);
-                            addHoverEffect(conditionElements[iCon]);
-                            addHoverEffect(conditionElements[iCon2]);
+                            conditionElements[iCon2].classList.add("possibleConflict");
+                            // addHoverEffect(conditionElements[iCon]);
+                            // addHoverEffect(conditionElements[iCon2]);
                             let actionElements = conditionElements[iCon].querySelectorAll(".content-infos.do");
+                            // console.log("trying to add to :", actionElements[iAct]);
+                            // console.log("from: ", conditionElements[iCon]);
                             actionElements[iAct].classList.add(className);
-                            addHoverEffect(actionElements[iAct]);
+                            actionElements[iAct].classList.add("possibleConflict");
+                            // addHoverEffect(actionElements[iAct]);
                             let actionElements2 = conditionElements[iCon2].querySelectorAll(".content-infos.do");
+                            // console.log("trying to add to :", actionElements2[iAct2]);
+                            // console.log("from: ", conditionElements[iCon2]);
                             actionElements2[iAct2].classList.add(className);
-                            addHoverEffect(actionElements2[iAct2]);
+                            actionElements2[iAct2].classList.add("possibleConflict");
+                            // addHoverEffect(actionElements2[iAct2]);
                             // conditionElements[iCon].classList.add(className);
                             //add an icon to warn
                             // // console.log(conditionElements[iCon]);
@@ -78,7 +87,7 @@ async function startInBuilder() {
                 //add a class to the to the condition element
                 //if possible also on the action element
             }
-            addHoverEffect(conditionElements[iCon]);
+            // addHoverEffect(conditionElements[iCon]);
         }
         else if (conditions[iCon].type == "calculation") {
             // // console.log("Condition type:", conditions[iCon].type);
@@ -144,6 +153,14 @@ async function startInBuilder() {
             }
         }
     }
-    //check for changes to the checkboxes, if a condition is selected, add the hovereffect for the conflicts
+
+    let conflictElements = conditionsListElement.getElementsByClassName("possibleConflict")
+    console.log("found this many possible conflict elements", conflictElements.length);
+    console.log("list:", conflictElements);
+    for (let index = 0; index < conflictElements.length; index++) {
+        const element = conflictElements[index];
+        addHoverEffect(element);
+    }
+    
     addCss();
 }
