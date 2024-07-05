@@ -66,6 +66,7 @@ function preprocessElements(elementList, conditions, questions) {
 
 
     }
+    return "done";
 }
 
 function createActionElement(action, questions) {
