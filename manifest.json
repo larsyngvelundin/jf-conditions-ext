@@ -26,6 +26,7 @@
                 "modules/builder/fetchQuestionsProps.js",
                 "modules/builder/main.js",
                 "modules/builder/preprocessConditions.js",
+                "modules/builder/preprocessElements.js",
                 "modules/helpFunctions/addCollapsible.js",
                 "modules/helpFunctions/addCss.js",
                 "modules/helpFunctions/addHoverEffect.js",
