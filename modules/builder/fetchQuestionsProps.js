@@ -6,7 +6,7 @@ async function fetchQuestionsProps(htmlContent) {
         let questionPropsString = match[1];
         try {
             questionProps = JSON.parse(questionPropsString);
-            console.log("questionProps", questionProps);
+            // console.log("questionProps", questionProps);
         } catch (error) {
             console.error('Error parsing questionProps:', error);
         }
