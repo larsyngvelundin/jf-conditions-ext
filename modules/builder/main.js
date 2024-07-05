@@ -1,22 +1,9 @@
 var clickToggle = false; //find better solution for later
 async function startInBuilder() {
 
-    // let htmlContent = document.innerHTML;
-    // console.log("content:",htmlContent);
-
     let conditionsListElement = await waitForElm('.listGroup-content');
-
-    // console.log("found condition list element");
-    // console.log(conditionsListElement);
     let conditionElements = conditionsListElement.getElementsByClassName("mediaBox");
-    // console.log("fetched conditionElements");
-    // console.log(conditionElements);
-
-    // console.log("Before preprocess", conditions);
-
-    // console.log("After preprocess", conditions);
-
-    // // var conditions = __formProps.conditions;
+    
     let htmlContent = await fetchHtmlContent();
     let conditions = await fetchFormProps(htmlContent);
     conditions = preprocessConditions(conditions.conditions);
