@@ -15,7 +15,6 @@ function getConditionLi(condition, iCon) {
     innerHTML += `<div class="actionDiv" style="display:block;">`;
     for (let iAct = 0; iAct < condition.action.length; iAct++) {
         var action = condition.action[iAct];
-        // console.log(action);
         if ('field' in action) {
             innerHTML += `<div>`;
             innerHTML += `<span id="${iCon}-${iAct}-${action.id}" class="conditionActionResult"></span>`;
@@ -34,16 +33,16 @@ function getConditionLi(condition, iCon) {
             }
             innerHTML += `</div>`;
         }
-        else if('resultField' in action){
+        else if ('resultField' in action) {
             innerHTML += `<div>`;
             innerHTML += `<span id="${iCon}-${iAct}-${action.id}" class="conditionActionResult"></span>`;
             var equationId = action.equation;
             innerHTML += `<b>ADD</b> ${getFieldLabel(equationId.substring(1, equationId.length - 1))} to ${getFieldLabel(action.resultField)}`;
             innerHTML += `</div>`;
         }
-        else{
-            // console.log("Couldn't find");
-            // console.log(action);
+        else {
+            console.error("Couldn't find action (getConditionLi)");
+            console.error(action);
         }
     }
     innerHTML += "</div>"

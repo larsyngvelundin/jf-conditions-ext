@@ -1,63 +1,32 @@
 function addHoverEffect(element) {
-    // console.log("Trying to add hover for ", element);
     if (element.classList.contains("conditionExtHoverCheck")) {
-        // if(element.classList.contains("content-infos")){
-        //     console.log("It's an");
-        // }
-
-        // let cur_element = conditionElements[iCon].getElementsByClassName("mediaBox-content")[0];
-        // let new_element = cur_element.cloneNode(true);
-        // cur_element.parentNode.replaceChild(new_element, cur_element);
-        // console.log("Already had the check class");
         return;
     }
-    // console.log("Adding");
     function getClassListStr() {
         var classListStr = "";
         var classList = element.classList;
-        // // console.log(" classListStr", classListStr);
         classList.forEach(classEntry => {
-            // // console.log("classEntry", classEntry);
             if (classEntry.indexOf("conflict-") > -1) {
                 classListStr = classListStr + "." + classEntry + ",";
             }
         });
         classListStr = classListStr.slice(0, -1);
-        // // console.log("trying to show", classListStr);
         return classListStr;
     }
 
-    // try {
-    //     var elms = document.querySelectorAll(getClassListStr());
-    // }
-    // catch {
-    //     var elms = []
-    // }
-    // // console.log("elms", elms);
-    // var n = elms.length;
     function addConflictClass() {
-        // console.log("In addConflictClass");
-        // console.log(element);
-        // console.log(element.classList);
-        // console.log(element.classList.contains("content-infos"));
         try {
             var elms = document.querySelectorAll(getClassListStr());
-            // // console.log("this is the elements:", elms);
         }
         catch {
             var elms = []
         }
         for (var i = 0; i < elms.length; i++) {
             elms[i].classList.add("conflictConditionHover");
-            // if (element.tagName == 'DIV'){
-            //     elms[i].classList.remove("conflictConditionHover");
-            // }
         }
-        //Check if hover is directly on an action
+        //Check if hover is directly on an action and un-highlight any unrelated conflicts
         if (element.classList.contains("content-infos")) {
-            // // console.log("Hovering directly on action");
             let conflictClass = getClassListStr().slice(1);
-            // // console.log("conflictClass", conflictClass);
             let conditionsListElement = document.getElementsByClassName('listGroup-content')[0];
             let actionElements = conditionsListElement.getElementsByClassName("content-infos");
             for (var iActive = 0; iActive < actionElements.length; iActive++) {
@@ -71,7 +40,6 @@ function addHoverEffect(element) {
                     conditionElements[iActive].classList.add("conflictConditionHoverOverride");
                 }
             }
-            // var elms = document.querySelectorAll()
         }
     }
     function removeConflictClass() {
@@ -89,7 +57,6 @@ function addHoverEffect(element) {
         }
     }
     element.onmouseover = function () {
-        // console.log("Mouse hover, and clickToggle is", clickToggle);
         if (!clickToggle) {
             addConflictClass();
         }
@@ -112,15 +79,5 @@ function addHoverEffect(element) {
             addConflictClass();
         }
     }, false);
-
     element.classList.add("conditionExtHoverCheck");
-
-    // for (var i = 0; i < n; i++) {
-    //     elms[i].onmouseover = function () {
-    //         addConflictClass();
-    //     };
-    //     elms[i].onmouseout = function () {
-    //         removeConflictClass();
-    //     };
-    // }
 }

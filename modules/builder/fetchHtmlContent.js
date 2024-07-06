@@ -1,6 +1,4 @@
-async function fetchHtmlContent() {
-    //Fetching the conditions page again to catch 2 variables that I couldn't access otherwise.
-    
+async function fetchHtmlContent() {    
     let htmlContent = await fetch(window.location.href)
         .then(response => {
             if (response.ok) {
