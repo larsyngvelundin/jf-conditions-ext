@@ -1,17 +1,16 @@
 function getFieldLabel(id) {
-    try{
-    fieldElement = JotForm.getFieldFromID(id);
-    fieldName = fieldElement.getElementsByTagName("label")[0].innerHTML;
-    fieldName = removeSpanTags(fieldName);
-    fieldName = fieldName.trim();
-    if (fieldName == ""){
-        return "Empty Label"
+    try {
+        fieldElement = JotForm.getFieldFromID(id);
+        fieldName = fieldElement.getElementsByTagName("label")[0].innerHTML;
+        fieldName = removeSpanTags(fieldName);
+        fieldName = fieldName.trim();
+        if (fieldName == "") {
+            return "Empty Label"
+        }
+        return fieldName.trim();
     }
-    return fieldName.trim();
-    }
-    catch (error){
+    catch (error) {
         fieldName = `Unkown Label ${id}`
-        // console.log("id:", id);
         return fieldName;
     }
 }

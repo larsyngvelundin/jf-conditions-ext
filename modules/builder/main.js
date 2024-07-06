@@ -1,132 +1,84 @@
 var clickToggle = false; //find better solution for later
+console.error("test",clickToggle)
 async function startInBuilder() {
-
+    //getting the condition html elements
     let conditionsListElement = await waitForElm('.listGroup-content');
     let conditionElements = conditionsListElement.getElementsByClassName("mediaBox");
 
+    //getting the form variables
     let htmlContent = await fetchHtmlContent();
-    let conditions = await fetchFormProps(htmlContent);
-    conditions = preprocessConditions(conditions.conditions);
-    //preprocess conditions
-    //use index and set a new "conditionIndex"
-    //go through field/fields and save each as it's own "condition"
-    //Save each action with a new "actionIndex"
+    let formProps = await fetchFormProps(htmlContent);
     let questionProps = await fetchQuestionsProps(htmlContent);
-    // // console.log("conditions", conditions);
-    // // console.log("questionProps",questionProps);
-
-    //maybe this await doesn't do anything?
+    
+    //preprocess conditions to unfold 'Multiple'
+    conditions = preprocessConditions(formProps.conditions);
+    
+    //preocess the html elements to add all folded terms/actions
     await preprocessElements(conditionElements, conditions, questionProps);
+    //maybe this await doesn't do anything?
 
     var warningIcon = document.createElement("div");
     warningIcon.classList.add("conditionWarningIcon");
     warningIcon.innerHTML = "!";
 
+
+    //remove the existing click event that selects conditions when clicking on them
     for (let iCon = 0; iCon < conditions.length; iCon++) {
-        // //Use clone to remove eventListeners for now
-        // let cur_element = conditionElements[iCon].getElementsByClassName("mediaBox-content")[0];
-        // let clone_element = cur_element.cloneNode(true);
-
-        // //save the current buttons
-        // let cur_buttons = cur_element.getElementsByClassName("itemBox-actions")[0];
-        // console.log("Found this cur_buttons:", cur_buttons);
-        // //replace clone buttons with current buttons
-        // let clone_buttons = clone_element.getElementsByClassName("itemBox-actions")[0];
-        // // clone_buttons.parentNode.replaceChild(cur_buttons, clone_buttons);
-
-        // //save current mediaBox-contenthover
-        // let cur_contenthover = cur_element.getElementsByClassName("mediaBox-contenthover")[0];
-        // console.log("Found this contenthover:", cur_contenthover);
-        // //replace clone
-        // // let clone_contenthover = clone_element.getElementsByClassName("mediaBox-contenthover")[0];
-        // // clone_contenthover.parentNode.replaceChild(cur_contenthover, clone_contenthover);
-
-        // //replace current element with the new clone
-        // // cur_element.parentNode.replaceChild(clone_element, cur_element);
-
         let cur_element = conditionElements[iCon].getElementsByClassName("mediaBox-contentmain")[0];
-        // console.log("Found this cur_element:", cur_element);
         let clone_element = cur_element.cloneNode(true);
         cur_element.parentNode.replaceChild(clone_element, cur_element);
     }
 
     for (let iCon = 0; iCon < conditions.length - 1; iCon++) {
-
-
-        // // console.log(`Condition ${iCon}`, conditions[iCon]);
-        // var conditionLi = getConditionLi(conditions[iCon], iCon);
-        // conditionList.appendChild(conditionLi);
+        //for now, these condition types are similar enough, might need to be separated later
         if (conditions[iCon].type == "field" || conditions[iCon].type == "require" || conditions[iCon].type == "mask") {
-            // // console.log("Condition type:", conditions[iCon].type);
             for (let iAct = 0; iAct < conditions[iCon].action.length; iAct++) {
-                //for each action
-                //go through the actions of conditions after iCon
                 for (let iCon2 = iCon + 1; iCon2 < conditions.length; iCon2++) {
                     for (let iAct2 = 0; iAct2 < conditions[iCon2].action.length; iAct2++) {
-                        //if the field and type 'visibility' is the same
+                        //if 2 actions are trying to affect the same field in the same way
                         if (conditions[iCon].action[iAct].field ==
                             conditions[iCon2].action[iAct2].field
                             && getActionType(conditions[iCon].action[iAct]) ==
                             getActionType(conditions[iCon2].action[iAct2])) {
-
-                            // // console.log("SAME FIELD SAME ACTION");
-                            // // console.log(conditions[iCon].action[iAct]);
-                            // conditionElements[iCon].style.backgroundColor = "red";
-                            // let className = `conflict-${iCon}-${iAct}_${iCon2}-${iAct2}`;
                             let className = `conflict-${conditions[iCon].action[iAct].field}-${getActionType(conditions[iCon].action[iAct])}`;
+
                             conditionElements[iCon].classList.add(className);
                             conditionElements[iCon].classList.add("possibleConflict");
                             conditionElements[iCon2].classList.add(className);
                             conditionElements[iCon2].classList.add("possibleConflict");
-                            // addHoverEffect(conditionElements[iCon]);
-                            // addHoverEffect(conditionElements[iCon2]);
+
                             let actionElements = conditionElements[iCon].querySelectorAll(".content-infos.do");
-                            // console.log("trying to add to :", actionElements[iAct]);
-                            // console.log("from: ", conditionElements[iCon]);
                             actionElements[iAct].classList.add(className);
                             actionElements[iAct].classList.add("possibleConflict");
-                            // addHoverEffect(actionElements[iAct]);
                             let actionElements2 = conditionElements[iCon2].querySelectorAll(".content-infos.do");
-                            // console.log("trying to add to :", actionElements2[iAct2]);
-                            // console.log("from: ", conditionElements[iCon2]);
                             actionElements2[iAct2].classList.add(className);
                             actionElements2[iAct2].classList.add("possibleConflict");
-                            // addHoverEffect(actionElements2[iAct2]);
-                            // conditionElements[iCon].classList.add(className);
-                            //add an icon to warn
-                            // // console.log(conditionElements[iCon]);
-                            // // console.log(conditionElements[iCon].getElementsByClassName("conditionWarningIcon").length == 0);
+
+                            //redo to add warning icon after loop
                             if (conditionElements[iCon].getElementsByClassName("conditionWarningIcon").length == 0) {
                                 conditionElements[iCon].appendChild(warningIcon.cloneNode());
                             }
-
-                            // // console.log(conditionElements[iCon2]);
-                            // // console.log(conditionElements[iCon2].getElementsByClassName("conditionWarningIcon").length == 0);
                             if (conditionElements[iCon2].getElementsByClassName("conditionWarningIcon").length == 0) {
                                 conditionElements[iCon2].appendChild(warningIcon.cloneNode());
                             }
                         }
                     }
                 }
-                //add a class to the to the condition element
-                //if possible also on the action element
             }
-            // addHoverEffect(conditionElements[iCon]);
         }
         else if (conditions[iCon].type == "calculation") {
-            // // console.log("Condition type:", conditions[iCon].type);
             for (let iAct = 0; iAct < conditions[iCon].action.length; iAct++) {
                 for (let iCon2 = iCon + 1; iCon2 < conditions.length; iCon2++) {
                     for (let iAct2 = 0; iAct2 < conditions[iCon2].action.length; iAct2++) {
                         if (conditions[iCon].action[iAct].resultField ==
                             conditions[iCon2].action[iAct2].resultField) {
-                            // // console.log("SAME FIELD SAME ACTION");
-                            // // console.log(conditions[iCon].action[iAct]);
                             let className = `conflict-${conditions[iCon].action[iAct].resultField}-${getActionType(conditions[iCon].action[iAct])}`;
+
                             conditionElements[iCon].classList.add(className);
                             conditionElements[iCon2].classList.add(className);
                             addHoverEffect(conditionElements[iCon]);
                             addHoverEffect(conditionElements[iCon2]);
+
                             let actionElements = conditionElements[iCon].querySelectorAll(".content-infos.do");
                             actionElements[iAct].classList.add(className);
                             addHoverEffect(actionElements[iAct]);
@@ -134,14 +86,10 @@ async function startInBuilder() {
                             actionElements2[iAct2].classList.add(className);
                             addHoverEffect(actionElements2[iAct2]);
 
-                            // // console.log(conditionElements[iCon]);
-                            // // console.log(conditionElements[iCon].getElementsByClassName("conditionWarningIcon").length == 0);
+                            //redo to add warning icon after loop
                             if (conditionElements[iCon].getElementsByClassName("conditionWarningIcon").length == 0) {
                                 conditionElements[iCon].appendChild(warningIcon.cloneNode());
                             }
-
-                            // // console.log(conditionElements[iCon2]);
-                            // // console.log(conditionElements[iCon2].getElementsByClassName("conditionWarningIcon").length == 0);
                             if (conditionElements[iCon2].getElementsByClassName("conditionWarningIcon").length == 0) {
                                 conditionElements[iCon2].appendChild(warningIcon.cloneNode());
                             }
@@ -157,16 +105,20 @@ async function startInBuilder() {
                     conditions[iCon].action[0].skipTo ==
                     conditions[iCon2].action[0].skipTo) {
                         let className = `conflict-${conditions[iCon].action[0].skipHide}-${conditions[iCon].action[0].skipTo}`;
+
                         conditionElements[iCon].classList.add(className);
                         conditionElements[iCon2].classList.add(className);
                         addHoverEffect(conditionElements[iCon]);
                         addHoverEffect(conditionElements[iCon2]);
+                        
                         let actionElements = conditionElements[iCon].querySelectorAll(".content-infos.do");
                         actionElements[0].classList.add(className);
                         addHoverEffect(actionElements[0]);
                         let actionElements2 = conditionElements[iCon2].querySelectorAll(".content-infos.do");
                         actionElements2[0].classList.add(className);
                         addHoverEffect(actionElements2[0]);
+
+                        //redo to add warning icon after loop
                         if (conditionElements[iCon].getElementsByClassName("conditionWarningIcon").length == 0) {
                             conditionElements[iCon].appendChild(warningIcon.cloneNode());
                         }
@@ -179,12 +131,9 @@ async function startInBuilder() {
     }
 
     let conflictElements = conditionsListElement.getElementsByClassName("possibleConflict")
-    // console.log("found this many possible conflict elements", conflictElements.length);
-    // console.log("list:", conflictElements);
     for (let index = 0; index < conflictElements.length; index++) {
-        const element = conflictElements[index];
-        addHoverEffect(element);
+        addHoverEffect(conflictElements[index]);
     }
-    
+
     addCss();
 }
