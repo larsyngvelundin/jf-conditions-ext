@@ -10,6 +10,9 @@ function getFieldLabel(id) {
         return fieldName.trim();
     }
     catch (error) {
+        let baseId = id.split("|")[0];
+        let baseField = JotForm.getFieldFromID(baseId)
+        // console.log("Here's basefield", baseField);
         fieldName = `Unkown Label ${id}`
         return fieldName;
     }
