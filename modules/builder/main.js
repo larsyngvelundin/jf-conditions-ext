@@ -41,6 +41,7 @@ async function startInBuilder() {
                             && getActionType(conditions[iCon].action[iAct]) ==
                             getActionType(conditions[iCon2].action[iAct2])) {
                             let className = `conflict-${conditions[iCon].action[iAct].field}-${getActionType(conditions[iCon].action[iAct])}`;
+                            className = className.replace("|", "slash"); //fix for multiline
 
                             conditionElements[iCon].classList.add(className);
                             conditionElements[iCon].classList.add("possibleConflict");
@@ -73,6 +74,7 @@ async function startInBuilder() {
                         if (conditions[iCon].action[iAct].resultField ==
                             conditions[iCon2].action[iAct2].resultField) {
                             let className = `conflict-${conditions[iCon].action[iAct].resultField}-${getActionType(conditions[iCon].action[iAct])}`;
+                            className = className.replace("|", "slash"); //fix for multiline
 
                             conditionElements[iCon].classList.add(className);
                             conditionElements[iCon2].classList.add(className);
@@ -105,6 +107,7 @@ async function startInBuilder() {
                     conditions[iCon].action[0].skipTo ==
                     conditions[iCon2].action[0].skipTo) {
                         let className = `conflict-${conditions[iCon].action[0].skipHide}-${conditions[iCon].action[0].skipTo}`;
+                        className = className.replace("|", "slash"); //fix for multiline
 
                         conditionElements[iCon].classList.add(className);
                         conditionElements[iCon2].classList.add(className);
