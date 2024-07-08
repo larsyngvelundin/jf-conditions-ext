@@ -99,17 +99,18 @@ function getActionText(action, questions) {
         switch (actionType) {
             case "HideMultiple":
             case "Hide":
-                return `<b> Hide </b><span class=""></span> <span>${questions[action.field].text}</span>`;
+                return `<b> Hide </b><span class=""></span> <span>${getFieldText(action.field, questions)}</span>`;
             case "ShowMultiple":
             case "Show":
-                return `<b> Show </b><span class=""></span> <span>${questions[action.field].text}</span>`;
+                return `<b> Show </b><span class=""></span> <span>${getFieldText(action.field, questions)}</span>`;
             case "Disable":
-                return `<b> Disable </b><span class=""></span><span class="">${questions[action.field].text}</span>`;
+                return `<b> Disable </b><span class=""></span><span class="">${getFieldText(action.field, questions)}</span>`;
+            case "Enable":
+                return `<b> Enable </b><span class=""></span><span class="">${getFieldText(action.field, questions)}</span>`;
             case "UnrequireMultiple":
             case "RequireMultiple":
             case "Unrequire":
             case "Require":
-            case "Enable":
                 return `'${actionType}' not yet added"`
         }
         return `'${actionType}' (not yet added)`;

@@ -24,6 +24,7 @@
                 "modules/builder/fetchFormProps.js",
                 "modules/builder/fetchHtmlContent.js",
                 "modules/builder/fetchQuestionsProps.js",
+                "modules/builder/getFieldText.js",
                 "modules/builder/main.js",
                 "modules/builder/preprocessConditions.js",
                 "modules/builder/preprocessElements.js",
