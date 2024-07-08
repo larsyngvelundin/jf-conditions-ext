@@ -1,5 +1,4 @@
 var clickToggle = false; //find better solution for later
-console.error("test",clickToggle)
 async function startInBuilder() {
     //getting the condition html elements
     let conditionsListElement = await waitForElm('.listGroup-content');
