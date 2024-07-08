@@ -1,6 +1,5 @@
 function preprocessElements(elementList, conditions, questions) {
     for (let iCon = 0; iCon < conditions.length; iCon++) {
-
         let termElementCount = elementList[iCon].getElementsByClassName("if").length;
         if (termElementCount != conditions[iCon].terms.length) {
             //for simplicity's sake, delete current term elements
@@ -37,13 +36,13 @@ function preprocessElements(elementList, conditions, questions) {
                 spanElement.insertBefore(newActionElement, moreElement);
             }
             moreElement.remove();
-            
+
             //remove expand button if it's there
             let expandElement = elementList[iCon].getElementsByClassName("expand-condition-block")[0];
-            try{
+            try {
                 expandElement.remove();
             }
-            catch{
+            catch {
                 //If it fails to remove, then it's probably not there, so just skip
             }
         }
@@ -76,7 +75,7 @@ function createActionElement(action, questions) {
     svgElement.setAttribute('viewBox', '0 0 24 24');
     svgElement.setAttribute('width', '16');
     svgElement.setAttribute('height', '16');
-    
+
     let pathElement = document.createElementNS(svgNamespace, 'path');
     pathElement.setAttribute('fill-rule', 'evenodd');
     pathElement.setAttribute('d', getActionSvgPath(action));
@@ -104,11 +103,14 @@ function getActionText(action, questions) {
             case "ShowMultiple":
             case "Show":
                 return `<b> Show </b><span class=""></span> <span>${questions[action.field].text}</span>`;
+            case "Disable":
+                return `<b> Disable </b><span class=""></span><span class="">${questions[action.field].text}</span>`;
             case "UnrequireMultiple":
             case "RequireMultiple":
             case "Unrequire":
             case "Require":
-                return "not yet added"
+            case "Enable":
+                return `'${actionType}' not yet added"`
         }
         return `'${actionType}' (not yet added)`;
     }
@@ -118,7 +120,7 @@ function getActionText(action, questions) {
     else if (action.hasOwnProperty("newCalculationType")) {
         return "(not yet added)"; //Should never be the case
     }
-    return `(Action type not yet added)`; 
+    return `(Action type not yet added)`;
 }
 
 function getActionSvgPath(action) {
@@ -135,6 +137,8 @@ function getActionSvgPath(action) {
             case "RequireMultiple":
             case "Unrequire":
             case "Require":
+            case "Disable":
+            case "Enable":
                 return "M12 4a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L14 12l4.562 2.634a1 1 0 0 1-1 1.732L13 13.732V19a1 1 0 1 1-2 0v-5.268l-4.563 2.634a1 1 0 1 1-1-1.732L10 12 5.437 9.366a1 1 0 0 1 1-1.732L11 10.268V5a1 1 0 0 1 1-1Z";
         }
     }
@@ -160,7 +164,7 @@ function createTermElement(term, questions) {
     secondElement.classList.add("info");
     secondElement.classList.add("bgColor-before");
     parentElement.appendChild(secondElement);
-    
+
     let thirdElement = document.createElement("div");
     thirdElement.classList.add("content-infos-icon");
     thirdElement.classList.add("content-infos-icon-arrow");
