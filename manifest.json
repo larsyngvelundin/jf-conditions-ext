@@ -8,6 +8,7 @@
                 "*://*.jotform.com/build/*",
                 "*://*.jotform.com/form/*",
                 "*://*.jotform.com/edit/*",
+                "*://*.jotform.com/draft/*",
                 "*://*.jotform.com/1*",
                 "*://*.jotform.com/2*",
                 "*://*.jotform.com/3*",
