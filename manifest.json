@@ -36,7 +36,7 @@
                 "modules/helpFunctions/dragElement.js",
                 "modules/helpFunctions/getActionType.js",
                 "modules/helpFunctions/hasAfter.js",
-                "modules/helpFunctions/removeSpanTags.js",
+                "modules/helpFunctions/removeTextTags.js",
                 "modules/helpFunctions/sleep.js",
                 "modules/helpFunctions/waitForElm.js",
                 "modules/list/getConditionLi.js",
