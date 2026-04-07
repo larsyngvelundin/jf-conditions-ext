@@ -89,6 +89,13 @@ function addCss() {
         border: #ffffff00 solid 2px !important;
     }
 
+    /* Temporary CSS for filtering clicked conflicts */
+    .listGroup-content:has(.conditionClicked) .mediaBox.conditions{
+        display: none !important;
+    }
+    .listGroup-content:has(.conditionClicked) .mediaBox.conditions:has(.conflictConditionHover){
+        display: flex !important;
+    }
 `;
     document.body.appendChild(ConditionListStyles);
 }
